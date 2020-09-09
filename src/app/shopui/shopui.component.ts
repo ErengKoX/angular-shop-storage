@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { ShopUi} from '../calculated'
+
 @Component({
   selector: 'app-shopui',
   templateUrl: './shopui.component.html',
@@ -8,7 +8,7 @@ import { ShopUi} from '../calculated'
 })
 export class ShopuiComponent implements OnInit {
 
-  calculate : ShopUi ={
+  /*calculate : ShopUi ={
     no:5,
     name:'rrr',
     price:100,
@@ -16,7 +16,7 @@ export class ShopuiComponent implements OnInit {
     sumUnit: 0,
    
   }
-  selectedUser: ShopUi;
+  selectedUser: ShopUi;*/
   //int1 = new Calculated
   
   constructor() { }

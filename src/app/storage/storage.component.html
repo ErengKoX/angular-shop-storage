@@ -1,49 +1,49 @@
 <button class="btn btn-primary mb-3" (click)="addRow()">New</button>
+
 <body>
-    <ag-grid-angular
-style="width: 600px; height: 400px;"
-class="ag-theme-alpine"
-(gridReady)="onGridReady($event)"
-(click)="onSelectionChanged(rowData)"
-#agGrid
-[columnDefs]="columnDefs"
-[rowData]="rowData"
-[rowSelection] = "rowSelection"
-rowSelection="multiple"
-[frameworkComponents]="frameworkComponents"
->
-</ag-grid-angular>
-<div *ngIf="selected" >
+    <div>
+        <ag-grid-angular
+            class="ag-theme-alpine"
+            (gridReady)="onGridReady($event)"
+            (click)="onSelectionChanged(rowData)"
+            #agGrid
+            [columnDefs]="columnDefs"
+            [rowData]="rowData"
+            [rowSelection] = "rowSelection"
+            rowSelection="multiple"
+            [frameworkComponents]="frameworkComponents"
+        >
+        </ag-grid-angular>
+    </div>
+    <div *ngIf="selected" class="div2">
 
 
-<h2>Add or Edit</h2>
+        <h2>Add or Edit</h2>
 
-<p><span ng-show   style="color:red" >No :</span>
-<label >{{selected.no}}</label></p>
+        <p><span ng-show   style="color:red" >No :</span>
+        <label >{{selected.no}}</label></p>
 
-<p><span ng-show   style="color:red" >Name :</span>
-<input type="text" [(ngModel)]="selected.name">
+        <p><span ng-show   style="color:red" >Name :</span>
+        <input type="text" [(ngModel)]="selected.name">
 
-</p>
+        </p>
 
-<p><span ng-show   style="color:red" >Price :</span>
-<input type="text"[(ngModel)]="selected.price" >
-</p>
-    
-    <p><span ng-show   style="color:red" >Quantity :</span>
-    <input  type="text"  [(ngModel)]="selected.quantity">
-    </p>
+        <p><span ng-show   style="color:red" >Price :</span>
+        <input type="text"[(ngModel)]="selected.price" >
+        </p>
+            
+            <p><span ng-show   style="color:red" >Quantity :</span>
+            <input  type="text"  [(ngModel)]="selected.quantity">
+            </p>
 
- <!--   <p><span ng-show   style="color:red" >Control :</span>
-        <input type="text"  [(ngModel)]="selected.control" >
-        </p>-->
-
-
-    <button  class="summit" (click)="register()">Register</button>
-
-</div>
+        <!--   <p><span ng-show   style="color:red" >Control :</span>
+                <input type="text"  [(ngModel)]="selected.control" >
+                </p>-->
 
 
+            <button  class="summit" (click)="register()">Register</button>
+
+    </div>
 </body>
 
 
