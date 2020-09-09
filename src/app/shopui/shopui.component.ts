@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { ShopUi} from '../calculated'
 @Component({
   selector: 'app-shopui',
   templateUrl: './shopui.component.html',
@@ -7,12 +8,22 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/dra
 })
 export class ShopuiComponent implements OnInit {
 
-  rowData: AllItem[] = [];
-  selectedUser: AllItem;
+  calculate : ShopUi ={
+    no:5,
+    name:'rrr',
+    price:100,
+    quantity:0,
+    sumUnit: 0,
+   
+  }
+  selectedUser: ShopUi;
+  //int1 = new Calculated
+  
   constructor() { }
   
-  ngOnInit(): void {
-     
+  ngOnInit(){
+   
+    
   }
 
   items = [
@@ -22,7 +33,7 @@ export class ShopuiComponent implements OnInit {
     { name: 'Beer', price: 360, sumUnit: 0 }
   ];
   basket = []
-  
+
   getSum() {
     let res = 0;
     this.basket.forEach(element => {
@@ -30,8 +41,8 @@ export class ShopuiComponent implements OnInit {
     });
     return res;
   }
-  //
-  drop(event: any) {
+  
+  drop(event: CdkDragDrop<any[]>) {
     console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -40,14 +51,13 @@ export class ShopuiComponent implements OnInit {
     else {
       event.previousContainer.data[event.previousIndex].sumUnit = 0;
       transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
     }
   }
-
 }
-export class AllItem{
+/*export class AllItem{
   no:number
   name: string
   price:number
@@ -58,4 +68,4 @@ export class AllItem{
     this.price = price;
     this.sumUnit = sumUnit;
   }
-}
+}*/

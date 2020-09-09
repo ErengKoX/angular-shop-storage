@@ -5,7 +5,10 @@ import { ShopuiComponent } from './shopui/shopui.component';
 
 const routes: Routes = [
   {path: 'shopui', component: ShopuiComponent},
-  {path: 'storage', component: StorageComponent}
+  {path: 'storage', component: StorageComponent},
+  {path: '',
+    redirectTo:'/storage',
+    pathMatch:'full'}
 ];
 
 @NgModule({

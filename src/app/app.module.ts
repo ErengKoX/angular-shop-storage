@@ -15,15 +15,17 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     StorageComponent,
-    ShopuiComponent
+    ShopuiComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AgGridModule.withComponents([]),
-    BrowserAnimationsModule,DragDropModule,
-    DragDropModule,FormsModule,ReactiveFormsModule, HttpClientModule,
-
+    BrowserAnimationsModule,
+    DragDropModule,
+    FormsModule,
+    ReactiveFormsModule, 
+    HttpClientModule
   ],
   exports:[],
   providers: [],
