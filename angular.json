@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "angular-shop-storage"
+  "defaultProject": "angular-shop-storage",
+  "cli": {
+    "analytics": false
+  }
 }
