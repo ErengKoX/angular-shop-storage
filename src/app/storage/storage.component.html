@@ -1,21 +1,16 @@
-<button class="btn btn-primary mb-3" (click)="onDeleteRow()">Delete</button>
-<button class="btn btn-primary mb-3" (click)="addRow()">Add</button>
-
+<button class="btn btn-primary mb-3" (click)="addRow()">New</button>
 <body>
-
-
     <ag-grid-angular
 style="width: 600px; height: 400px;"
 class="ag-theme-alpine"
 (gridReady)="onGridReady($event)"
 (click)="onSelectionChanged(rowData)"
-[defaultColDef]="defaultColDef"
 #agGrid
 [columnDefs]="columnDefs"
 [rowData]="rowData"
 [rowSelection] = "rowSelection"
 rowSelection="multiple"
-
+[frameworkComponents]="frameworkComponents"
 >
 </ag-grid-angular>
 <div *ngIf="selected" >
@@ -39,9 +34,9 @@ rowSelection="multiple"
     <input  type="text"  [(ngModel)]="selected.quantity">
     </p>
 
-    <p><span ng-show   style="color:red" >Control :</span>
+ <!--   <p><span ng-show   style="color:red" >Control :</span>
         <input type="text"  [(ngModel)]="selected.control" >
-        </p>
+        </p>-->
 
 
     <button  class="summit" (click)="register()">Register</button>
@@ -50,3 +45,7 @@ rowSelection="multiple"
 
 
 </body>
+
+
+<h4>Row data from button 1: </h4>
+<pre>{{rowDataClicked1 | json}}</pre>
