@@ -1,2 +1,52 @@
-<p>storage works!</p>
+<button class="btn btn-primary mb-3" (click)="onDeleteRow()">Delete</button>
+<button class="btn btn-primary mb-3" (click)="addRow()">Add</button>
 
+<body>
+
+
+    <ag-grid-angular
+style="width: 600px; height: 400px;"
+class="ag-theme-alpine"
+(gridReady)="onGridReady($event)"
+(click)="onSelectionChanged(rowData)"
+[defaultColDef]="defaultColDef"
+#agGrid
+[columnDefs]="columnDefs"
+[rowData]="rowData"
+[rowSelection] = "rowSelection"
+rowSelection="multiple"
+
+>
+</ag-grid-angular>
+<div *ngIf="selected" >
+
+
+<h2>Add or Edit</h2>
+
+<p><span ng-show   style="color:red" >No :</span>
+<label >{{selected.no}}</label></p>
+
+<p><span ng-show   style="color:red" >Name :</span>
+<input type="text" [(ngModel)]="selected.name">
+
+</p>
+
+<p><span ng-show   style="color:red" >Price :</span>
+<input type="text"[(ngModel)]="selected.price" >
+</p>
+    
+    <p><span ng-show   style="color:red" >Quantity :</span>
+    <input  type="text"  [(ngModel)]="selected.quantity">
+    </p>
+
+    <p><span ng-show   style="color:red" >Control :</span>
+        <input type="text"  [(ngModel)]="selected.control" >
+        </p>
+
+
+    <button  class="summit" (click)="register()">Register</button>
+
+</div>
+
+
+</body>
