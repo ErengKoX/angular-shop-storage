@@ -11,16 +11,20 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { HelloComponent } from './storage/hello.component';
+import { ButtonRendererComponent } from './storage/button.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     StorageComponent,
-    ShopuiComponent
+    ShopuiComponent,HelloComponent,ButtonRendererComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([ButtonRendererComponent]),
     BrowserAnimationsModule,DragDropModule,
     DragDropModule,FormsModule,ReactiveFormsModule, HttpClientModule,
 
