@@ -18,8 +18,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DragDropModule
   ],
+  exports:[],
   providers: [],
   bootstrap: [AppComponent]
 })
