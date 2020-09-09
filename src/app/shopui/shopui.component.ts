@@ -7,9 +7,12 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/dra
 })
 export class ShopuiComponent implements OnInit {
 
+  rowData: AllItem[] = [];
+  selectedUser: AllItem;
   constructor() { }
-
+  
   ngOnInit(): void {
+     
   }
 
   items = [
@@ -17,11 +20,9 @@ export class ShopuiComponent implements OnInit {
     { name: 'Tea', price: 140, sumUnit: 0 },
     { name: 'Water', price: 120, sumUnit: 0 },
     { name: 'Beer', price: 360, sumUnit: 0 }
-
-
   ];
   basket = []
-
+  
   getSum() {
     let res = 0;
     this.basket.forEach(element => {
@@ -29,19 +30,32 @@ export class ShopuiComponent implements OnInit {
     });
     return res;
   }
-
+  //
   drop(event: any) {
     console.log(event);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       
-    } else {
-      
+    } 
+    else {
       event.previousContainer.data[event.previousIndex].sumUnit = 0;
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
     }
+  }
+
+}
+export class AllItem{
+  no:number
+  name: string
+  price:number
+  sumUnit: number
+  constructor(no,name, price, sumUnit) {
+    this.no = no
+    this.name = name;
+    this.price = price;
+    this.sumUnit = sumUnit;
   }
 }
