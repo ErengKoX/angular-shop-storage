@@ -10,8 +10,6 @@ import { AgGridModule } from 'ag-grid-angular';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
-import { HelloComponent } from './storage/hello.component';
 import { ButtonRendererComponent } from './storage/button.component';
 
 
@@ -21,14 +19,14 @@ import { ButtonRendererComponent } from './storage/button.component';
     StorageComponent,
 
 
-    ShopuiComponent,HelloComponent,ButtonRendererComponent,
+    ShopuiComponent,ButtonRendererComponent
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AgGridModule.withComponents([ButtonRendererComponent]),
-    BrowserAnimationsModule,DragDropModule,
+    BrowserAnimationsModule,
     DragDropModule,FormsModule,ReactiveFormsModule, HttpClientModule,
 
   ],

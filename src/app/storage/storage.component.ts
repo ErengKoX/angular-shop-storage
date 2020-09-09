@@ -40,9 +40,9 @@ export class StorageComponent {
       }
     },
   ];
-
+  n:number =0
   rowData = [
-    {no: 1, name: "Tea", price: "150",quantity:"20 "},
+    {no: this.n, name: "Tea", price: "150",quantity:"20 "},
     {no: 2, name: "Coffee", price: "140",quantity:"50 "},
     {no: 3, name: "Weed", price: "360",quantity:"10 "},
     {no: 4, name: "Calpis", price: "120",quantity:"15 "},
@@ -52,6 +52,8 @@ export class StorageComponent {
 
   onBtnClick1(e) {
     this.rowDataClicked1 = e.rowData;
+    var selectedData = this.agGrid.api.getSelectedRows();
+    this.agGrid.api.updateRowData({ remove: selectedData });
   }
 
   rowSelection='single'
@@ -97,16 +99,17 @@ export class StorageComponent {
   
   }
   
-  addRow() {
+  onAddRow() {
+    
     this.agGrid.api.updateRowData({
-    add: [{ no: [this.selected.no+1], name: '', price: 0 ,quantity:'' }]
+      add: [{ no: [this.selected.no+1], name: '', price: 0 ,quantity:'' }]
    });
   }
- // onDeleteRow()
- // {
+  //onDeleteRow()
+  //{
   //var selectedData = this.agGrid.api.getSelectedRows();
- // this.agGrid.api.updateRowData({ remove: selectedData });
- // }
+  //this.agGrid.api.updateRowData({ remove: selectedData });
+  //}
   
   onGridReady(test){
   this.gridApi = test.api;
