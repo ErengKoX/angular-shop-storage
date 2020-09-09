@@ -30,7 +30,7 @@ export class ShopuiComponent implements OnInit {
     });
     return res;
   }
-
+  //
   drop(event: any) {
     console.log(event);
     if (event.previousContainer === event.container) {
