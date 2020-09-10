@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ViewChild ,Input} from '@angular/core';
 import { ButtonRendererComponent } from './button.component';
+import { Items } from '../Items';
 
 
 @Component({
@@ -17,6 +18,11 @@ export class StorageComponent {
   
   public gridApi
   public gridColumnApi
+  
+  ngOnInit() {
+this.rowData
+
+  }
 
   constructor() {
     this.frameworkComponents = {
