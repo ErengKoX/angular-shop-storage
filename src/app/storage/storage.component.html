@@ -5,43 +5,39 @@
         <ag-grid-angular
             class="ag-theme-alpine"
             (gridReady)="onGridReady($event)"
-            (click)="onSelectionChanged(rowData)"
+            (click)="onSelectionChanged()"
             #agGrid
             [columnDefs]="columnDefs"
             [rowData]="rowData"
             [rowSelection] = "rowSelection"
-            rowSelection="multiple"
+            
             [frameworkComponents]="frameworkComponents"
         >
         </ag-grid-angular>
     </div>
+    <!-- rowSelection="multiple"-->
     <div *ngIf="selected" class="div2">
-
-
         <h2>Add or Edit</h2>
 
-        <p><span ng-show   style="color:red" >No :</span>
+        <p><span style="color:red" >No :</span>
         <label >{{selected.no}}</label></p>
 
-        <p><span ng-show   style="color:red" >Name :</span>
+        <p><span style="color:red" >Name :</span>
         <input type="text" [(ngModel)]="selected.name">
 
         </p>
 
-        <p><span ng-show   style="color:red" >Price :</span>
+        <p><span style="color:red" >Price :</span>
         <input type="text"[(ngModel)]="selected.price" >
         </p>
             
-            <p><span ng-show   style="color:red" >Quantity :</span>
-            <input  type="text"  [(ngModel)]="selected.quantity">
+        <p><span style="color:red" >Quantity :</span>
+        <input  type="text"  [(ngModel)]="selected.quantity">
             </p>
 
         <!--   <p><span ng-show   style="color:red" >Control :</span>
                 <input type="text"  [(ngModel)]="selected.control" >
                 </p>-->
-
-
-            <button  class="summit" (click)="register()">Register</button>
-
+        <button  (click)="register()">Register</button>
     </div>
 </body>

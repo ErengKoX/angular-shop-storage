@@ -9,11 +9,12 @@ import {Items, Items2, dataAr} from '../Items'
 export class ShopuiComponent implements OnInit {
 
 
-  
+  showitems:Items
+  showitems2:Items[]=[]
   constructor() { }
   
   ngOnInit(){
-   
+    console.log(this.showitems.name)
   }
   
   items = [
@@ -21,6 +22,7 @@ export class ShopuiComponent implements OnInit {
     { name: 'Tea', price: 140, sumUnit: 0 },
     { name: 'Water', price: 120, sumUnit: 0 },
     { name: 'Beer', price: 360, sumUnit: 0 }
+    
   ];
   basket = []
 

@@ -17,9 +17,8 @@ import { ButtonRendererComponent } from './storage/button.component';
   declarations: [
     AppComponent,
     StorageComponent,
-
-
-    ShopuiComponent,ButtonRendererComponent
+    ShopuiComponent,
+    ButtonRendererComponent
 
   ],
   imports: [

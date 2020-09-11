@@ -3,6 +3,8 @@ import { AgGridAngular } from 'ag-grid-angular';
 import { ViewChild ,Input} from '@angular/core';
 import { ButtonRendererComponent } from './button.component';
 import { Items } from '../Items';
+import { combineLatest } from 'rxjs';
+import { Grid, GridOptions, GridApi } from 'ag-grid-community';
 
 
 @Component({
@@ -19,9 +21,10 @@ export class StorageComponent {
   public gridApi
   public gridColumnApi
   
+  showdata:Items[]=[]
+  showdata2:Items
   ngOnInit() {
-this.rowData
-
+    console.log(this.rowData)
   }
 
   constructor() {
@@ -31,8 +34,6 @@ this.rowData
   }
 
   columnDefs = [
-
-
     {headerName: 'No', field: 'no',width:70,resizable: false},
     {headerName: 'Name', field: 'name',width:150,resizable: false},
     {headerName: 'Price', field: 'price',width:100,resizable: false},
@@ -48,7 +49,7 @@ this.rowData
   ];
   n:number =0
   rowData = [
-    {no: this.n, name: "Tea", price: "150",quantity:"20 "},
+    {no: 1, name: "Tea", price: "150",quantity:"20 "},
     {no: 2, name: "Coffee", price: "140",quantity:"50 "},
     {no: 3, name: "Weed", price: "360",quantity:"10 "},
     {no: 4, name: "Calpis", price: "120",quantity:"15 "},
@@ -67,8 +68,7 @@ this.rowData
   gridOption = {
       getRowNodeId : function(data){
       return data.no
-      
-  }
+    }
   }
   
   selected:any
@@ -77,39 +77,52 @@ this.rowData
   addPrice : any
   addQuantity : any
  
-  
-  onSelectionChanged(event){
-  if(event)
-  this.selected = this.gridApi.getSelectedRows();
-  this.selected = this.selected.length === 1 ? this.selected[0] : '';
-  
+ 
+  onSelectionChanged(){
+    
+    this.selected = this.gridApi.getSelectedRows()
+    this.selected = this.selected.length === 1 ? this.selected[0] : '';
+    console.log(this.selected)
   }
   
   register(){
-  this.addName = this.selected.name
-  this.addNo = this.selected.no
-  this.addPrice = this.selected.price
-  this.addQuantity = this.selected.quantity
- 
+    this.addName = this.selected.name
+    this.addNo = this.selected.no
+    this.addPrice = this.selected.price
+    this.addQuantity = this.selected.quantity
   
-  var rowNode = this.gridApi.getRowNode(this.selected.no-1)
-  var newData = {
+  
+    var rowNode = this.gridApi.getRowNode(this.selected.no-1)
+    var newData = {
       no:this.addNo,
       name:this.addName,
       price:this.addPrice,
       quantity:this.addQuantity,
  
-  };
-  
-  rowNode.updateData(newData)
-  
-  }
-  
-  onAddRow() {
+    };
     
-    this.agGrid.api.updateRowData({
-      add: [{ no: [this.selected.no+1], name: '', price: 0 ,quantity:'' }]
-   });
+    rowNode.updateData(newData)
+  }
+  no:any=0
+  addRow:any
+  onAddRow() {
+    if (this.rowData.length== this.no) {
+      this.no=this.no+1
+    } else {
+     this.no++
+    }
+    if (this.rowData.length != this.no) {
+      this.no = ++this.rowData.length
+    } else { 
+
+    }
+    console.log(this.no)
+    this.selected
+    /*this.agGrid.api.updateRowData({
+      add: [{ no: [this.no], name: '', price: 0 ,quantity:0}]
+    });*/
+    
+    
   }
   //onDeleteRow()
   //{
@@ -118,8 +131,10 @@ this.rowData
   //}
   
   onGridReady(test){
-  this.gridApi = test.api;
-  this.gridColumnApi.columnApi;
+    this.gridApi = test.api;
+    this.gridColumnApi.columnApi;
+    this.gridOption
+    
   }
-  }
-
+  
+}
