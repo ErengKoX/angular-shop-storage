@@ -21,8 +21,7 @@ export class StorageComponent {
   public gridApi
   public gridColumnApi
   
-  showdata:Items[]=[]
-  showdata2:Items
+ 
   ngOnInit() {
     console.log(this.rowData)
   }
@@ -49,11 +48,11 @@ export class StorageComponent {
   ];
   n:number =0
   rowData = [
-    {no: 1, name: "Tea", price: "150",quantity:"20 "},
+    /*{no: 1, name: "Tea", price: "150",quantity:"20 "},
     {no: 2, name: "Coffee", price: "140",quantity:"50 "},
     {no: 3, name: "Weed", price: "360",quantity:"10 "},
     {no: 4, name: "Calpis", price: "120",quantity:"15 "},
-    {no: 5, name: "CowPiss", price: "999",quantity:"999 "}
+    {no: 5, name: "CowPiss", price: "999",quantity:"999 "}*/
   ]
   
 
@@ -72,6 +71,8 @@ export class StorageComponent {
   }
   
   selected:any
+  show1=new Items()
+  show2:Items[]=[]
   addName : any
   addNo : any
   addPrice : any
@@ -82,30 +83,38 @@ export class StorageComponent {
     
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
-    console.log(this.selected)
+    //console.log(this.selected)
+
   }
   
   register(){
-    this.addName = this.selected.name
-    this.addNo = this.selected.no
-    this.addPrice = this.selected.price
-    this.addQuantity = this.selected.quantity
-  
-  
-    var rowNode = this.gridApi.getRowNode(this.selected.no-1)
-    var newData = {
-      no:this.addNo,
-      name:this.addName,
-      price:this.addPrice,
-      quantity:this.addQuantity,
- 
-    };
+      this.addName = this.selected.name
+      this.addNo = this.selected.no
+      this.addPrice = this.selected.price
+      this.addQuantity = this.selected.quantity
+    if (this.check == true) {
+      var rowNode = this.gridApi.getRowNode(this.selected.no-1)
+      var newData = {
+        no:this.addNo,
+        name:this.addName,
+        price:this.addPrice,
+        quantity:this.addQuantity,
+      };
+      rowNode.updateData(newData)
+    }
     
-    rowNode.updateData(newData)
+    if(this.check == false){
+      this.agGrid.api.updateRowData({
+        add: [{ no: this.addNo, name: this.addName, price: this.addPrice ,quantity:this.addQuantity}]
+      });
+      this.check =true
+    }
+    
   }
   no:any=0
   addRow:any
-  onAddRow() {
+  check:boolean =true
+  onAddRow(event) {
     if (this.rowData.length== this.no) {
       this.no=this.no+1
     } else {
@@ -116,8 +125,11 @@ export class StorageComponent {
     } else { 
 
     }
-    console.log(this.no)
-    this.selected
+    
+    if(event){
+      this.selected = { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
+      this.check= false
+    }
     /*this.agGrid.api.updateRowData({
       add: [{ no: [this.no], name: '', price: 0 ,quantity:0}]
     });*/
