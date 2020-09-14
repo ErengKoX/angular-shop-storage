@@ -4,13 +4,13 @@
 
 <div class="alignCenter">
   <div cdkDropListGroup>
-    <div class="example-container">
+    <div class="example-container" >
       <h2>Available items</h2>
 
-      <div cdkDropList [cdkDropListData]="showitems2" class="example-list test" cdkDropListSortingDisabled
+      <div cdkDropList [cdkDropListData]="items" class="example-list test" cdkDropListSortingDisabled
         (cdkDropListDropped)="drop($event)">
 
-        <div class="example-box-rec" *ngFor="let item of showitems2" cdkDrag>
+        <div class="example-box-rec" *ngFor="let item of items" cdkDrag>
           <div style="margin-left: 10px; margin-top: 10px; width: 100%; text-align: left;"> {{item.name}}</div>
           <div style="width: 100%; text-align: center;"> {{item.price}} Baht</div>
         </div>

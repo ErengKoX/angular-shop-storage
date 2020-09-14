@@ -3,11 +3,14 @@ export class Items{
     name:string
     price:number
     quantity:number
-    
+    /*constructor(no,name,price,quan){
+        this.no=no
+        this.name = name
+        this.price = price
+        this.quantity = quan
+    }*/
 }
-
-export const dataAr:Items[]=[
-]
-export class Items2{
+export class Items2 extends Items{
    
+    
 }
