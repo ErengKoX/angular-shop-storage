@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {Items, Items2, dataAr} from '../Items'
+import {Items, Items2} from '../Items'
 @Component({
   selector: 'app-shopui',
   templateUrl: './shopui.component.html',
@@ -8,22 +8,24 @@ import {Items, Items2, dataAr} from '../Items'
 })
 export class ShopuiComponent implements OnInit {
 
-
+  
   showitems:Items
   showitems2:Items[]=[]
   constructor() { }
-  
-  ngOnInit(){
-    console.log(this.showitems.name)
+  showitems3
+  getrow(chilData:any){
+    this.showitems3 = chilData
+
   }
-  
+  ngOnInit(){
+    //console.log(this.showitems3)
+  }
   items = [
     { name: 'Coffee', price: 150, sumUnit: 0 },
     { name: 'Tea', price: 140, sumUnit: 0 },
     { name: 'Water', price: 120, sumUnit: 0 },
     { name: 'Beer', price: 360, sumUnit: 0 }
-    
-  ];
+  ]
   basket = []
 
   getSum() {

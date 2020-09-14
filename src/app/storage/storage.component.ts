@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ViewChild ,Input} from '@angular/core';
 import { ButtonRendererComponent } from './button.component';
-import { Items } from '../Items';
+import { Items, Items2 } from '../Items';
 import { combineLatest } from 'rxjs';
 import { Grid, GridOptions, GridApi } from 'ag-grid-community';
-
+import {ItemService} from '../item.service'
 
 @Component({
   selector: 'app-storage',
@@ -23,7 +23,8 @@ export class StorageComponent {
   
  
   ngOnInit() {
-    console.log(this.rowData)
+    console.log(this.rowData.length)
+    
   }
 
   constructor() {
@@ -48,11 +49,11 @@ export class StorageComponent {
   ];
   n:number =0
   rowData = [
-    /*{no: 1, name: "Tea", price: "150",quantity:"20 "},
+    {no: 1, name: "Tea", price: "150",quantity:"20 "},
     {no: 2, name: "Coffee", price: "140",quantity:"50 "},
     {no: 3, name: "Weed", price: "360",quantity:"10 "},
     {no: 4, name: "Calpis", price: "120",quantity:"15 "},
-    {no: 5, name: "CowPiss", price: "999",quantity:"999 "}*/
+    {no: 5, name: "CowPiss", price: "999",quantity:"999 "}
   ]
   
 
@@ -71,13 +72,16 @@ export class StorageComponent {
   }
   
   selected:any
-  show1=new Items()
+  //show1 = new Items(this.addNo,this.addName,this.addPrice,this.addQuantity)
+  show1 = new Items()
   show2:Items[]=[]
-  addName : any
+  show3:Items
   addNo : any
+  addName : any
   addPrice : any
   addQuantity : any
- 
+  @Output() toui : EventEmitter<any> =new EventEmitter
+  
  
   onSelectionChanged(){
     
@@ -109,12 +113,13 @@ export class StorageComponent {
       });
       this.check =true
     }
-    
+    //this.show1 = new Items(this.addNo,this.addName,this.addPrice,this.addQuantity)
   }
   no:any=0
   addRow:any
   check:boolean =true
-  onAddRow(event) {
+  onAddRow(event:any) {
+    
     if (this.rowData.length== this.no) {
       this.no=this.no+1
     } else {
@@ -126,10 +131,11 @@ export class StorageComponent {
 
     }
     
-    if(event){
-      this.selected = { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
+    //if(event){
+      
+      this.selected= { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
       this.check= false
-    }
+    //}
     /*this.agGrid.api.updateRowData({
       add: [{ no: [this.no], name: '', price: 0 ,quantity:0}]
     });*/

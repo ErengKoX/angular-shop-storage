@@ -14,6 +14,7 @@
             [frameworkComponents]="frameworkComponents"
         >
         </ag-grid-angular>
+       
     </div>
     <!-- rowSelection="multiple"-->
     <div *ngIf="selected" class="div2">
@@ -23,7 +24,7 @@
         <label >{{selected.no}}</label></p>
 
         <p><span style="color:red" >Name :</span>
-        <input type="text" [(ngModel)]="selected.name">
+        <input type="text" [(ngModel)]="selected.name" >
 
         </p>
 
@@ -33,7 +34,7 @@
             
         <p><span style="color:red" >Quantity :</span>
         <input  type="text"  [(ngModel)]="selected.quantity">
-            </p>
+        </p>
 
         <!--   <p><span ng-show   style="color:red" >Control :</span>
                 <input type="text"  [(ngModel)]="selected.control" >
