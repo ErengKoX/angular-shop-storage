@@ -166,8 +166,8 @@ export class StorageComponent {
   //this.agGrid.api.updateRowData({ remove: selectedData });
   //}
   
-  onGridReady(test){
-    this.gridApi = test.api;
+  onGridReady(params){
+    this.gridApi = params.api;
     this.gridColumnApi.columnApi;
     this.gridOption 
   }
