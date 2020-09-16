@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonRendererComponent } from './storage/button.component';
+import { ItemService } from './item.service';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import { ButtonRendererComponent } from './storage/button.component';
 
   ],
   exports:[],
-  providers: [],
+  providers: [ItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
