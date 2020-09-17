@@ -37,16 +37,6 @@ export class StorageComponent {
       return this._item;
   }
  
-  /*addItem(){
-    const currentItem:Items = {
-      no:this._item.no,
-      name:this._item.name,
-      price:this._item.price,
-      quantity:this._item.quantity,
-      sumUnit:this._item.sumUnit
-     };
-     this.ItemService.addItem(currentItem);
-  }*/
   columnDefs = [
     {headerName: 'No', field: 'no',width:70,resizable: false},
     {headerName: 'Name', field: 'name',width:150,resizable: false},
@@ -63,14 +53,9 @@ export class StorageComponent {
   ];
   n:number =0
   rowData = [
-    /*{no: 1, name: "Tea", price: "150",quantity:"20 "},
-    {no: 2, name: "Coffee", price: "140",quantity:"50 "},
-    {no: 3, name: "Weed", price: "360",quantity:"10 "},
-    {no: 4, name: "Calpis", price: "120",quantity:"15 "},
-    {no: 5, name: "CowPiss", price: "999",quantity:"999 "}*/
   ]
-  
-
+    
+  //delete data 
   onBtnClick1(e) {
     this.rowDataClicked1 = e.rowData;
     var selectedData = this.agGrid.api.getSelectedRows();
@@ -92,11 +77,8 @@ export class StorageComponent {
   addQuantity : any
   
   onSelectionChanged(){
-    
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
-    //console.log(this.selected)
-
   }
   
   register(){
@@ -137,8 +119,9 @@ export class StorageComponent {
   addRow:any
   check:boolean =true
   _item:Items
+
+
   onAddRow() {
-    
     if (this.rowData.length== this.no) {
       this.no=this.no+1
     } else {
@@ -149,23 +132,11 @@ export class StorageComponent {
     } else { 
 
     }
-    
-    
     this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
-    //this.selected= { no: [this.no], name:' ', price:0 ,quantity:0}
     this.check= false
+  }  
 
-    /*this.agGrid.api.updateRowData({
-      add: [{ no: [this.no], name: '', price: 0 ,quantity:0}]
-    });*/
-    
-  }
-  //onDeleteRow()
-  //{
-  //var selectedData = this.agGrid.api.getSelectedRows();
-  //this.agGrid.api.updateRowData({ remove: selectedData });
-  //}
-  
+
   onGridReady(params){
     this.gridApi = params.api;
     this.gridColumnApi.columnApi;
