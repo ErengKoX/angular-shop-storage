@@ -27,7 +27,7 @@ import { ItemService } from './item.service';
     AppRoutingModule,
     AgGridModule.withComponents([ButtonRendererComponent]),
     BrowserAnimationsModule,
-    DragDropModule,FormsModule,ReactiveFormsModule, HttpClientModule,
+    DragDropModule,FormsModule,ReactiveFormsModule, HttpClientModule
 
   ],
   exports:[],

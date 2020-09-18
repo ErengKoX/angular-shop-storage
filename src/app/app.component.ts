@@ -7,7 +7,6 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   title = 'angular-shop-storage';
-  //router :Router
   constructor(private router: Router){}
   
   dis :boolean = false

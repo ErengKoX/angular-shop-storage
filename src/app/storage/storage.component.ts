@@ -18,8 +18,8 @@ export class StorageComponent {
   frameworkComponents: any;
   rowDataClicked1 = {};
   
-  public gridApi
-  public gridColumnApi
+  gridApi
+  gridColumnApi
   
  
   ngOnInit() {
