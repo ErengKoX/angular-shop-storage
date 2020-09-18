@@ -1,5 +1,11 @@
-import { Component, Input } from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ViewChild ,Input} from '@angular/core';
+import { ButtonRendererComponent } from './storage/button.component';
+import { Items } from './Items';
+import { combineLatest } from 'rxjs';
+import { Grid, GridOptions, GridApi } from 'ag-grid-community';
+import {ItemService} from './item.service'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,11 +13,142 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   title = 'angular-shop-storage';
-  //router :Router
-  constructor(private router: Router){}
+  @ViewChild("agGrid",{static: false})agGrid : AgGridAngular;
+  name = 'Angular 6';
+  frameworkComponents: any;
+  rowDataClicked1 = {};
   
-  dis :boolean = false
-  dis2 :boolean = true
+  public gridApi
+  public gridColumnApi
+  
+ 
+  ngOnInit() {
+
+  }
+
+  constructor(private ItemService : ItemService) {
+    this.frameworkComponents = {
+      buttonRenderer: ButtonRendererComponent,
+    }
+  }
+   
+ 
+  public get Item():Items{
+      return this._item;
+  }
+ 
+  columnDefs = [
+    {headerName: 'No', field: 'no',width:70,resizable: false},
+    {headerName: 'Name', field: 'name',width:150,resizable: false},
+    {headerName: 'Price', field: 'price',width:100,resizable: false},
+    {headerName: 'Quantity', field: 'quantity',width:150,resizable: false},
+    {
+      headerName: 'Control',
+      cellRenderer: 'buttonRenderer',
+      cellRendererParams: {
+        onClick: this.onBtnClick1.bind(this),
+        label: 'Delete'
+      }
+    },
+  ];
+  n:number =0
+  rowData = [
+  ]
+    
+  //delete data 
+  onBtnClick1(e) {
+    this.rowDataClicked1 = e.rowData;
+    var selectedData = this.agGrid.api.getSelectedRows();
+    this.agGrid.api.updateRowData({ remove: selectedData });
+  }
+
+  rowSelection='single'
+
+  gridOption = {
+      getRowNodeId : function(data){
+      return data.no
+    }
+  }
+  
+  selected:any
+  addNo : any
+  addName : any
+  addPrice : any
+  addQuantity : any
+  
+  onSelectionChanged(){
+    this.selected = this.gridApi.getSelectedRows()
+    this.selected = this.selected.length === 1 ? this.selected[0] : '';
+  }
+  
+  register(){
+    this.addNo = this._item.no
+    this.addName = this._item.name  
+    this.addPrice = this._item.price
+    this.addQuantity = this._item.quantity
+    if (this.check == true) {
+      var rowNode = this.gridApi.getRowNode(this.selected.no-1)
+      var newData = {
+        no:this.addNo,
+        name:this.addName,
+        price:this.addPrice,
+        quantity:this.addQuantity,
+      };
+      rowNode.updateData(newData)
+    }
+    
+    if(this.check == false){
+      this.agGrid.api.updateRowData({
+        add: [{ no: this.addNo, name: this.addName, price: this.addPrice ,quantity:this.addQuantity}]
+      });
+      this.check =true
+    }
+
+    const currentItem:Items = {
+      no:this._item.no,
+      name:this._item.name,
+      price:this._item.price,
+      quantity:this._item.quantity,
+      sumUnit:this._item.sumUnit
+     };
+     this.ItemService.addItem(currentItem);
+     
+    //this.show1 = new Items(this.addNo,this.addName,this.addPrice,this.addQuantity)
+  }
+  no:any=0
+  addRow:any
+  check:boolean =true
+  _item:Items
+
+
+  onAddRow() {
+    if (this.rowData.length== this.no) {
+      this.no=this.no+1
+    } else {
+     this.no++
+    }
+    if (this.rowData.length != this.no) {
+      this.no = ++this.rowData.length
+    } else { 
+
+    }
+    this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
+    this.check= false
+  }  
+
+
+  onGridReady(params){
+    this.gridApi = params.api;
+    this.gridColumnApi.columnApi;
+    this.gridOption 
+  }
+}
+
+
+  //router :Router
+  /*constructor(private router: Router){}
+  //dis :boolean = false
+ dis2 :boolean = true
   switchpage(){
     
     this.router.navigateByUrl('/shopui');
@@ -20,8 +157,8 @@ export class AppComponent {
     
   }
   switchpage2(){
-    this.router.navigateByUrl('/storage');
+    this.router.navigateByUrl('');
     this.dis2 =true
     this.dis = false
   }
-}
+}*/
