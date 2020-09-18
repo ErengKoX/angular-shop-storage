@@ -2,7 +2,7 @@ import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Items} from '../Items'
 import { ItemService } from '../item.service';
-import {Chart} from 'node_modules/chart.js'
+//import {Chart} from 'node_modules/chart.js'
 import { identifierModuleUrl } from '@angular/compiler';
 @Component({
   selector: 'app-shopui',
