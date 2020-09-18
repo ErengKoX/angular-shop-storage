@@ -1,5 +1,11 @@
-import { Component, Input } from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ViewChild ,Input} from '@angular/core';
+import { ButtonRendererComponent } from './storage/button.component';
+import { Items } from './Items';
+import { combineLatest } from 'rxjs';
+import { Grid, GridOptions, GridApi } from 'ag-grid-community';
+import {ItemService} from './item.service'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,8 +13,15 @@ import {Router} from '@angular/router';
 })
 export class AppComponent {
   title = 'angular-shop-storage';
-  constructor(private router: Router){}
+ 
+  ngOnInit() {
+
+  }
+
   
+
+  //router :Router
+  /*constructor(private router: Router){}
   dis :boolean = false
   dis2 :boolean = true
   switchpage(){
@@ -19,8 +32,8 @@ export class AppComponent {
     
   }
   switchpage2(){
-    this.router.navigateByUrl('/storage');
+    this.router.navigateByUrl('');
     this.dis2 =true
     this.dis = false
-  }
+  }*/
 }

@@ -9,6 +9,7 @@ import { ICellRendererAngularComp } from 'ag-grid-angular';
     `
 })
 
+//delete data 
 export class ButtonRendererComponent implements ICellRendererAngularComp {
 
   params;
@@ -25,11 +26,9 @@ export class ButtonRendererComponent implements ICellRendererAngularComp {
 
   onClick($event) {
     if (this.params.onClick instanceof Function) {
-      // put anything into params u want pass into parents component
       const params = {
         event: $event,
         rowData: this.params.node.data
-        // ...something
       }
       this.params.onClick(params);
 

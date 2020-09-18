@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StorageComponent } from './storage/storage.component';
-import { ShopuiComponent } from './shopui/shopui.component';
+import { ShopuiComponent } from './uishop.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { AgGridModule } from 'ag-grid-angular';
