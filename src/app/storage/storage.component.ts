@@ -23,7 +23,7 @@ export class StorageComponent {
   
  
   ngOnInit() {
-
+    console.log(this.ItemService.getItems())
   }
 
   constructor(private ItemService : ItemService) {
