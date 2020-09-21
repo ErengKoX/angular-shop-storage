@@ -18,13 +18,14 @@
     </div>
 
     <div class="example-container">
+      <canvas id="myChart"></canvas>
       <h2>Shopping basket</h2>
 
-      <div cdkDropList [cdkDropListData]="basket" class="example-list" (cdkDropListDropped)="drop($event)">
+      <div cdkDropList [cdkDropListData]="basket" class="example-list" (cdkDropListDropped)="drop($event)" >
         <div class="example-box-list" *ngFor="let item of basket" cdkDrag>
           <div style="width: 33%;">{{item.name}}</div>
           <div style="width: 33%;"><input type="number" [(ngModel)]="item.sumUnit" value="0" min="0" max="999" /></div>
-          <div style="width: 33%;">{{ item.price * item.sumUnit }} Baht</div>
+          <div style="width: 33%;" >{{ item.price * item.sumUnit }} Baht</div>
         </div>
 
       </div>

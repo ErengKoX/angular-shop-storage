@@ -18,13 +18,12 @@ export class StorageComponent {
   frameworkComponents: any;
   rowDataClicked1 = {};
   
-  public gridApi
-  public gridColumnApi
+  gridApi
+  gridColumnApi
   
  
   ngOnInit() {
-    console.log(this.rowData.length)
-    
+    console.log(this.ItemService.getItems())
   }
 
   constructor() {
@@ -148,8 +147,8 @@ export class StorageComponent {
   //this.agGrid.api.updateRowData({ remove: selectedData });
   //}
   
-  onGridReady(test){
-    this.gridApi = test.api;
+  onGridReady(params){
+    this.gridApi = params.api;
     this.gridColumnApi.columnApi;
     this.gridOption
     
