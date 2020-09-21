@@ -1,5 +1,5 @@
 export class Items{
-    no:number
+    no:number =0
     name:string
     price:number
     quantity:number

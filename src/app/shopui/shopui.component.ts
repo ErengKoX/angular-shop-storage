@@ -15,19 +15,20 @@ export class ShopuiComponent implements OnInit {
   Chart: any = []
   constructor(private ItemService : ItemService) { }
   //getitem = this.ItemService.getItems()
-  data_name =[]
-  data_price =[]
+  name =[]
+  price =[]
+  max:number
   ngOnInit(){
-    this.items= this.ItemService.getItems()
-    
+    this.items = this.ItemService.getItems()
+    this.max = this.items[0].quantity
     /*for (var index = 0; index < this.basket.length; index++) {
       this.data_name.push(this.basket[index].name)
       this.data_price.push(this.basket[index].price)
     }*/
   
   }
-  sumUnit=0
-  getChart(){
+  //sumUnit=0
+  /*getChart(){
     this.Chart = new Chart('myChart', { // สร้าง object และใช้ชื่อ id lineChart ในการอ้างอิงเพื่อนำมาเเสดงผล
       type: 'pie',
       data: {
@@ -56,13 +57,12 @@ export class ShopuiComponent implements OnInit {
          }]
        }
    })
-  }
+  }*/
   getSum() {
     var res = 0;
     this.basket.forEach(element => {
       res = res + (element.price * element.sumUnit);
-     
-    });
+    })
     return res;
     
   }
@@ -80,6 +80,6 @@ export class ShopuiComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    this.getChart()
+    //this.getChart()
   }
 }

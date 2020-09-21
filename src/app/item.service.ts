@@ -16,13 +16,18 @@ export class ItemService {
   quantity:number
     
   private _items:Items[] = [];
-
+  private _items2:Items[]=[]
   addItem(item: Items) {
-        this._items.push(item);
+    this._items.push(item);
   }
- 
   getItems(): Items[] {
         return this._items;
   }
+  addItem2(item:Items){
+    this._items2.push(item)
+   }
+  getItems2(): Items[] {
+    return this._items2;
+}
 }
 

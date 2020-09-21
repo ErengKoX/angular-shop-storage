@@ -17,13 +17,14 @@ export class StorageComponent {
   name = 'Angular 6';
   frameworkComponents: any;
   rowDataClicked1 = {};
-  
   gridApi
   gridColumnApi
   
  
   ngOnInit() {
-    console.log(this.ItemService.getItems())
+    //console.log(this.rowData)
+    this.rowData = this.ItemService.getItems2()
+    console.log(this.rowData.length)
   }
 
   constructor(private ItemService : ItemService) {
@@ -35,16 +36,16 @@ export class StorageComponent {
     return this._item;
   }
      
-      /*addItem(){
-        const currentItem:Items = {
-          no:this._item.no,
-          name:this._item.name,
-         price:this._item.price,
-         quantity:this._item.quantity,
-         sumUnit:this._item.sumUnit
-       };
-        this.ItemService.addItem(currentItem);
-      }*/
+  /*addItem(){
+    const currentItem:Items = {
+    no:this._item.no,
+    name:this._item.name,
+    price:this._item.price,
+    quantity:this._item.quantity,
+    sumUnit:this._item.sumUnit
+    };
+  this.ItemService.addItem(currentItem);
+  }*/
 
   columnDefs = [
     {headerName: 'No', field: 'no',width:70,resizable: false},
@@ -60,9 +61,8 @@ export class StorageComponent {
       }
     },
   ];
-  n:number =0
-  rowData = []
   
+  rowData = []
 
   onDelete(e) {
     this.rowDataClicked1 = e.rowData;
@@ -106,13 +106,13 @@ export class StorageComponent {
         price:this.addPrice,
         quantity:this.addQuantity,
       };
-      rowNode.updateData(newData)
+      //rowNode.updateData(newData)
     }
     
     if(this.check == false){
       this.agGrid.api.updateRowData({
         add: [{ no: this.addNo, name: this.addName, price: this.addPrice ,quantity:this.addQuantity}]
-      });
+      })
       this.check =true
     }
     const currentItem:Items = {
@@ -122,33 +122,32 @@ export class StorageComponent {
             quantity:this._item.quantity,
             sumUnit:this._item.sumUnit
            };
-      this.ItemService.addItem(currentItem);
-  }
-  no:any=0
-  addRow:any
-  check:boolean =true
-  onAddRow(event:any) {
+    this.ItemService.addItem(currentItem);
+    this.ItemService.addItem2(currentItem);
     
-    if (this.rowData.length== this.no) {
+    console.log(this.rowData.length)
+  }
+
+  no:any=0
+  check:boolean =true
+  onAddRow() {
+    
+    if (this.rowData.length == this.no) {
       this.no=this.no+1
     } else {
      this.no++
     }
     if (this.rowData.length != this.no) {
-      this.no = ++this.rowData.length
+      this.no = this.rowData.length+1
     } else { 
 
     }
     
     this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
-    //this.selected= { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
     this.check= false
-    
-    /*this.agGrid.api.updateRowData({
-      add: [{ no: [this.no], name: '', price: 0 ,quantity:0}]
-    });*/
-    
-    
+    console.log(this.rowData.length)
+    //this.selected= { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
+
   }
   //onDeleteRow()
   //{
@@ -158,7 +157,7 @@ export class StorageComponent {
   
   onGridReady(params){
     this.gridApi = params.api;
-    this.gridColumnApi.columnApi;
+    this.gridColumnApi = params.columnApi;
     this.gridOption 
   }
 }

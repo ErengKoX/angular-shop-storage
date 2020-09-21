@@ -1,4 +1,4 @@
-<button class="btn btn-primary mb-3" (click)="onAddRow($event)">New</button>
+<button class="btn btn-primary mb-3" (click)="onAddRow()">New</button>
 
 <body>
     <div>
@@ -8,7 +8,7 @@
             (click)="onSelectionChanged()"
             #agGrid
             [columnDefs]="columnDefs"
-            [rowData]="rowData"
+            [(rowData)]="rowData"
             [rowSelection] = "rowSelection"
             [frameworkComponents]="frameworkComponents"
         >
