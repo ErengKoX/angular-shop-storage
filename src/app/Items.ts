@@ -3,5 +3,14 @@ export class Items{
     name:string
     price:number
     quantity:number
-    sumUnit:number
+    /*constructor(no,name,price,quan){
+        this.no=no
+        this.name = name
+        this.price = price
+        this.quantity = quan
+    }*/
+}
+export class Items2 extends Items{
+   
+    
 }

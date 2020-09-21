@@ -1,4 +1,4 @@
-<button class="btn btn-primary mb-3" (click)="onAddRow()">New</button>
+<button class="btn btn-primary mb-3" (click)="onAddRow($event)">New</button>
 
 <body>
     <div>
@@ -17,28 +17,28 @@
        
     </div>
     <!-- rowSelection="multiple"-->
-    <div *ngIf="_item" class="div2">
+    <div *ngIf="selected" class="div2">
         <h2>Add or Edit</h2>
 
         <p><span style="color:red" >No :</span>
-        <label>{{_item.no}}</label></p>
+        <label >{{selected.no}}</label></p>
 
         <p><span style="color:red" >Name :</span>
-        <input type="text" [(ngModel)]="_item.name" >
+        <input type="text" [(ngModel)]="selected.name" >
 
         </p>
 
         <p><span style="color:red" >Price :</span>
-        <input type="text"[(ngModel)]="_item.price" >
+        <input type="text"[(ngModel)]="selected.price" >
         </p>
             
         <p><span style="color:red" >Quantity :</span>
-        <input type="text"  [(ngModel)]="_item.quantity">
+        <input  type="text"  [(ngModel)]="selected.quantity">
         </p>
 
         <!--   <p><span ng-show   style="color:red" >Control :</span>
                 <input type="text"  [(ngModel)]="selected.control" >
                 </p>-->
-        <button (click)="register()">Register</button>
+        <button  (click)="register()">Register</button>
     </div>
 </body>

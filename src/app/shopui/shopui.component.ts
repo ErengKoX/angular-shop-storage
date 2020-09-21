@@ -1,28 +1,30 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { Items} from '../Items'
-import { ItemService } from '../item.service';
+import {Items, Items2} from '../Items'
 @Component({
   selector: 'app-shopui',
   templateUrl: './shopui.component.html',
   styleUrls: ['./shopui.component.scss']
 })
 export class ShopuiComponent implements OnInit {
- 
-  constructor(private ItemService : ItemService) { }
+
   
-  
-  /*getItems(): void {
-    this.ItemService.getItems().subscribe(showitems2 => this.showitems = showitems2);
-  }*/
+  showitems:Items
+  showitems2:Items[]=[]
+  constructor() { }
+  showitems3
+  getrow(chilData:any){
+    this.showitems3 = chilData
+
+  }
   ngOnInit(){
-    this.items= this.ItemService.getItems()
+    //console.log(this.showitems3)
   }
   items = [
-    /*{ name: 'Coffee', price: 150, sumUnit: 0 },
+    { name: 'Coffee', price: 150, sumUnit: 0 },
     { name: 'Tea', price: 140, sumUnit: 0 },
     { name: 'Water', price: 120, sumUnit: 0 },
-    { name: 'Beer', price: 360, sumUnit: 0 }*/
+    { name: 'Beer', price: 360, sumUnit: 0 }
   ]
   basket = []
 
@@ -49,3 +51,15 @@ export class ShopuiComponent implements OnInit {
     }
   }
 }
+/*export class AllItem{
+  no:number
+  name: string
+  price:number
+  sumUnit: number
+  constructor(no,name, price, sumUnit) {
+    this.no = no
+    this.name = name;
+    this.price = price;
+    this.sumUnit = sumUnit;
+  }
+}*/

@@ -2,7 +2,7 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ViewChild ,Input} from '@angular/core';
 import { ButtonRendererComponent } from './button.component';
-import { Items } from '../Items';
+import { Items, Items2 } from '../Items';
 import { combineLatest } from 'rxjs';
 import { Grid, GridOptions, GridApi } from 'ag-grid-community';
 import {ItemService} from '../item.service'
@@ -23,30 +23,16 @@ export class StorageComponent {
   
  
   ngOnInit() {
-
+    console.log(this.rowData.length)
+    
   }
 
-  constructor(private ItemService : ItemService) {
+  constructor() {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
     }
   }
-   
- 
-  public get Item():Items{
-      return this._item;
-  }
- 
-  /*addItem(){
-    const currentItem:Items = {
-      no:this._item.no,
-      name:this._item.name,
-      price:this._item.price,
-      quantity:this._item.quantity,
-      sumUnit:this._item.sumUnit
-     };
-     this.ItemService.addItem(currentItem);
-  }*/
+
   columnDefs = [
     {headerName: 'No', field: 'no',width:70,resizable: false},
     {headerName: 'Name', field: 'name',width:150,resizable: false},
@@ -63,11 +49,11 @@ export class StorageComponent {
   ];
   n:number =0
   rowData = [
-    /*{no: 1, name: "Tea", price: "150",quantity:"20 "},
+    {no: 1, name: "Tea", price: "150",quantity:"20 "},
     {no: 2, name: "Coffee", price: "140",quantity:"50 "},
     {no: 3, name: "Weed", price: "360",quantity:"10 "},
     {no: 4, name: "Calpis", price: "120",quantity:"15 "},
-    {no: 5, name: "CowPiss", price: "999",quantity:"999 "}*/
+    {no: 5, name: "CowPiss", price: "999",quantity:"999 "}
   ]
   
 
@@ -86,11 +72,17 @@ export class StorageComponent {
   }
   
   selected:any
+  //show1 = new Items(this.addNo,this.addName,this.addPrice,this.addQuantity)
+  show1 = new Items()
+  show2:Items[]=[]
+  show3:Items
   addNo : any
   addName : any
   addPrice : any
   addQuantity : any
+  @Output() toui : EventEmitter<any> =new EventEmitter
   
+ 
   onSelectionChanged(){
     
     this.selected = this.gridApi.getSelectedRows()
@@ -100,10 +92,10 @@ export class StorageComponent {
   }
   
   register(){
-    this.addNo = this._item.no
-    this.addName = this._item.name  
-    this.addPrice = this._item.price
-    this.addQuantity = this._item.quantity
+      this.addName = this.selected.name
+      this.addNo = this.selected.no
+      this.addPrice = this.selected.price
+      this.addQuantity = this.selected.quantity
     if (this.check == true) {
       var rowNode = this.gridApi.getRowNode(this.selected.no-1)
       var newData = {
@@ -121,23 +113,12 @@ export class StorageComponent {
       });
       this.check =true
     }
-
-    const currentItem:Items = {
-      no:this._item.no,
-      name:this._item.name,
-      price:this._item.price,
-      quantity:this._item.quantity,
-      sumUnit:this._item.sumUnit
-     };
-     this.ItemService.addItem(currentItem);
-     
     //this.show1 = new Items(this.addNo,this.addName,this.addPrice,this.addQuantity)
   }
   no:any=0
   addRow:any
   check:boolean =true
-  _item:Items
-  onAddRow() {
+  onAddRow(event:any) {
     
     if (this.rowData.length== this.no) {
       this.no=this.no+1
@@ -150,14 +131,15 @@ export class StorageComponent {
 
     }
     
-    
-    this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
-    //this.selected= { no: [this.no], name:' ', price:0 ,quantity:0}
-    this.check= false
-
+    //if(event){
+      
+      this.selected= { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
+      this.check= false
+    //}
     /*this.agGrid.api.updateRowData({
       add: [{ no: [this.no], name: '', price: 0 ,quantity:0}]
     });*/
+    
     
   }
   //onDeleteRow()
@@ -169,6 +151,8 @@ export class StorageComponent {
   onGridReady(test){
     this.gridApi = test.api;
     this.gridColumnApi.columnApi;
-    this.gridOption 
+    this.gridOption
+    
   }
+  
 }
