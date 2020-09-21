@@ -17,6 +17,7 @@ export class ItemService {
     
   private _items:Items[] = [];
   private _items2:Items[]=[]
+  private _basket:Items[]=[]
   addItem(item: Items) {
     this._items.push(item);
   }
@@ -28,6 +29,14 @@ export class ItemService {
    }
   getItems2(): Items[] {
     return this._items2;
-}
+  }
+
+  //รับเข้า basket
+  addBasket(item:Items){
+    this._basket.push(item)
+   }
+  getBasket(): Items[] {
+    return this._basket;
+  }
 }
 

@@ -11,16 +11,18 @@ import { identifierModuleUrl } from '@angular/compiler';
 })
 export class ShopuiComponent implements OnInit {
   items = []
-  basket = []
+  basket =[]
+  addbasket:Items
   Chart: any = []
   constructor(private ItemService : ItemService) { }
   //getitem = this.ItemService.getItems()
   name =[]
   price =[]
-  max:number
+  max:number = 1
   ngOnInit(){
     this.items = this.ItemService.getItems()
-    this.max = this.items[0].quantity
+    //console.log(this.items)
+    
     /*for (var index = 0; index < this.basket.length; index++) {
       this.data_name.push(this.basket[index].name)
       this.data_price.push(this.basket[index].price)
@@ -28,14 +30,14 @@ export class ShopuiComponent implements OnInit {
   
   }
   //sumUnit=0
-  /*getChart(){
+  getChart(){
     this.Chart = new Chart('myChart', { // สร้าง object และใช้ชื่อ id lineChart ในการอ้างอิงเพื่อนำมาเเสดงผล
       type: 'pie',
       data: {
-          labels: this.data_name, // ชื่อของข้อมูลในแนวแกน x
+          labels: this.name, // ชื่อของข้อมูลในแนวแกน x
           datasets: [{ 
              label: 'Number of items sold in months',
-             data: this.data_price, 
+             data: this.price, 
              fill: false,
              lineTension: 0.2,
              //borderColor: "red", // สีของเส้น
@@ -57,7 +59,7 @@ export class ShopuiComponent implements OnInit {
          }]
        }
    })
-  }*/
+  }
   getSum() {
     var res = 0;
     this.basket.forEach(element => {
@@ -68,6 +70,9 @@ export class ShopuiComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<any[]>) {
+    //this.ItemService.addBasket(this.addbasket)
+    //console.log(this.basket)
+    
     console.log(event)
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -80,6 +85,6 @@ export class ShopuiComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    //this.getChart()
+    this.getChart()
   }
 }

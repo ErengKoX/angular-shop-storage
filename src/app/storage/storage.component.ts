@@ -22,7 +22,7 @@ export class StorageComponent {
   
  
   ngOnInit() {
-    //console.log(this.rowData)
+    
     this.rowData = this.ItemService.getItems2()
     console.log(this.rowData.length)
   }
@@ -124,8 +124,7 @@ export class StorageComponent {
            };
     this.ItemService.addItem(currentItem);
     this.ItemService.addItem2(currentItem);
-    
-    console.log(this.rowData.length)
+   
   }
 
   no:any=0
@@ -134,8 +133,9 @@ export class StorageComponent {
     
     if (this.rowData.length == this.no) {
       this.no=this.no+1
+      console.log(this.no)
     } else {
-     this.no++
+     //this.no++
     }
     if (this.rowData.length != this.no) {
       this.no = this.rowData.length+1
@@ -145,7 +145,7 @@ export class StorageComponent {
     
     this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
     this.check= false
-    console.log(this.rowData.length)
+    
     //this.selected= { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
 
   }
