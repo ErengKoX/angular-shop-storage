@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StorageComponent } from './storage/storage.component';
-import { ShopuiComponent } from './uishop.component';
+import { ShopuiComponent } from './shopui/shopui.component';
 
 const routes: Routes = [
   {path: 'shopui', component: ShopuiComponent},

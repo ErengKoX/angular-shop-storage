@@ -2,7 +2,7 @@ import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ViewChild ,Input} from '@angular/core';
 import { ButtonRendererComponent } from './button.component';
-import { Items, Items2 } from '../Items';
+import { Items } from '../Items';
 import { combineLatest } from 'rxjs';
 import { Grid, GridOptions, GridApi } from 'ag-grid-community';
 import {ItemService} from '../item.service'
@@ -26,11 +26,25 @@ export class StorageComponent {
     console.log(this.ItemService.getItems())
   }
 
-  constructor() {
+  constructor(private ItemService : ItemService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
     }
   }
+  public get Item():Items{
+    return this._item;
+  }
+     
+      /*addItem(){
+        const currentItem:Items = {
+          no:this._item.no,
+          name:this._item.name,
+         price:this._item.price,
+         quantity:this._item.quantity,
+         sumUnit:this._item.sumUnit
+       };
+        this.ItemService.addItem(currentItem);
+      }*/
 
   columnDefs = [
     {headerName: 'No', field: 'no',width:70,resizable: false},
@@ -41,29 +55,22 @@ export class StorageComponent {
       headerName: 'Control',
       cellRenderer: 'buttonRenderer',
       cellRendererParams: {
-        onClick: this.onBtnClick1.bind(this),
+        onClick: this.onDelete.bind(this),
         label: 'Delete'
       }
     },
   ];
   n:number =0
-  rowData = [
-    {no: 1, name: "Tea", price: "150",quantity:"20 "},
-    {no: 2, name: "Coffee", price: "140",quantity:"50 "},
-    {no: 3, name: "Weed", price: "360",quantity:"10 "},
-    {no: 4, name: "Calpis", price: "120",quantity:"15 "},
-    {no: 5, name: "CowPiss", price: "999",quantity:"999 "}
-  ]
+  rowData = []
   
 
-  onBtnClick1(e) {
+  onDelete(e) {
     this.rowDataClicked1 = e.rowData;
     var selectedData = this.agGrid.api.getSelectedRows();
     this.agGrid.api.updateRowData({ remove: selectedData });
   }
 
   rowSelection='single'
-
   gridOption = {
       getRowNodeId : function(data){
       return data.no
@@ -79,24 +86,20 @@ export class StorageComponent {
   addName : any
   addPrice : any
   addQuantity : any
-  @Output() toui : EventEmitter<any> =new EventEmitter
-  
  
   onSelectionChanged(){
-    
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
-    //console.log(this.selected)
 
   }
-  
+  _item:Items
   register(){
-      this.addName = this.selected.name
-      this.addNo = this.selected.no
-      this.addPrice = this.selected.price
-      this.addQuantity = this.selected.quantity
+    this.addNo = this._item.no
+    this.addName = this._item.name  
+    this.addPrice = this._item.price
+    this.addQuantity = this._item.quantity
     if (this.check == true) {
-      var rowNode = this.gridApi.getRowNode(this.selected.no-1)
+      var rowNode = this.gridApi.getRowNode(this._item.no-1)
       var newData = {
         no:this.addNo,
         name:this.addName,
@@ -112,7 +115,14 @@ export class StorageComponent {
       });
       this.check =true
     }
-    //this.show1 = new Items(this.addNo,this.addName,this.addPrice,this.addQuantity)
+    const currentItem:Items = {
+            no:this._item.no,
+            name:this._item.name,
+            price:this._item.price,
+            quantity:this._item.quantity,
+            sumUnit:this._item.sumUnit
+           };
+      this.ItemService.addItem(currentItem);
   }
   no:any=0
   addRow:any
@@ -130,11 +140,10 @@ export class StorageComponent {
 
     }
     
-    //if(event){
-      
-      this.selected= { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
-      this.check= false
-    //}
+    this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
+    //this.selected= { no: [this.no], name:this.show1.name, price:this.show1.price,quantity:this.show1.quantity}
+    this.check= false
+    
     /*this.agGrid.api.updateRowData({
       add: [{ no: [this.no], name: '', price: 0 ,quantity:0}]
     });*/
@@ -150,8 +159,6 @@ export class StorageComponent {
   onGridReady(params){
     this.gridApi = params.api;
     this.gridColumnApi.columnApi;
-    this.gridOption
-    
+    this.gridOption 
   }
-  
 }

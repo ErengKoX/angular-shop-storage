@@ -2,7 +2,7 @@ import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Items} from '../Items'
 import { ItemService } from '../item.service';
-//import {Chart} from 'node_modules/chart.js'
+import {Chart} from 'node_modules/chart.js'
 import { identifierModuleUrl } from '@angular/compiler';
 @Component({
   selector: 'app-shopui',
@@ -14,7 +14,7 @@ export class ShopuiComponent implements OnInit {
   basket = []
   Chart: any = []
   constructor(private ItemService : ItemService) { }
-  getitem = this.ItemService.getItems()
+  //getitem = this.ItemService.getItems()
   data_name =[]
   data_price =[]
   ngOnInit(){
@@ -26,11 +26,8 @@ export class ShopuiComponent implements OnInit {
     }*/
   
   }
-  /*sumUnit=0
-  
+  sumUnit=0
   getChart(){
-    
-    //console.log(this.sumUnit)
     this.Chart = new Chart('myChart', { // สร้าง object และใช้ชื่อ id lineChart ในการอ้างอิงเพื่อนำมาเเสดงผล
       type: 'pie',
       data: {
@@ -46,7 +43,7 @@ export class ShopuiComponent implements OnInit {
           }]
       },
       options: {
-        /*title: {
+        title: {
           text: "Line Chart",
           display: true
        }
@@ -59,7 +56,7 @@ export class ShopuiComponent implements OnInit {
          }]
        }
    })
-  }*/
+  }
   getSum() {
     var res = 0;
     this.basket.forEach(element => {
@@ -83,18 +80,6 @@ export class ShopuiComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    //this.getChart()
+    this.getChart()
   }
 }
-/*export class AllItem{
-  no:number
-  name: string
-  price:number
-  sumUnit: number
-  constructor(no,name, price, sumUnit) {
-    this.no = no
-    this.name = name;
-    this.price = price;
-    this.sumUnit = sumUnit;
-  }
-}*/

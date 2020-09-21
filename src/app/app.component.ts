@@ -6,6 +6,7 @@ import { Items } from './Items';
 import { combineLatest } from 'rxjs';
 import { Grid, GridOptions, GridApi } from 'ag-grid-community';
 import {ItemService} from './item.service'
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,10 +19,8 @@ export class AppComponent {
 
   }
 
-  
-
   //router :Router
-  /*constructor(private router: Router){}
+  constructor(private router: Router){}
   dis :boolean = false
   dis2 :boolean = true
   switchpage(){
@@ -32,8 +31,8 @@ export class AppComponent {
     
   }
   switchpage2(){
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/storage');
     this.dis2 =true
     this.dis = false
-  }*/
+  }
 }
