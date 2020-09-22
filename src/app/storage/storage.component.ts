@@ -53,13 +53,14 @@ export class StorageComponent {
     return this._item;
   }
 
-
+// กำหนด หัวข้อในตาราง
   columnDefs = [
     {headerName: 'No', field: 'no',width:70,resizable: false},
     {headerName: 'Name', field: 'name',width:150,resizable: false},
     {headerName: 'Price', field: 'price',width:100,resizable: false},
     {headerName: 'Quantity', field: 'quantity',width:150,resizable: false},
     {
+      //สร้างปุ่ม ลบ ในตาราง โดยใช้ ข้อมูลจากไฟล์ button.component.ts
       headerName: 'Control',
       cellRenderer: 'buttonRenderer',
       cellRendererParams: {
@@ -68,9 +69,11 @@ export class StorageComponent {
       }
     },
   ];
-  
-  rowData = []
 
+  //กำหนดให้ข้อมูลในตารางว่างเปล่า เพื่อที่จะ กด New เพื่อเพิ่มข้อมูล
+  rowData = []
+  
+  //กำหนดอีเว้น ของปุ่ม ลบ ที่อยู่ในตาราง โดยการคลิก row/ข้อมูล ที่อยู่ในตารางแล้วกด ปุ่ม Delete
   onDelete(e) {
     this.rowDataClicked1 = e.rowData;
     var selectedData = this.agGrid.api.getSelectedRows();
