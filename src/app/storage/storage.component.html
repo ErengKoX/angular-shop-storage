@@ -1,6 +1,5 @@
 <button class="btn btn-primary mb-3" (click)="onAddRow()">New</button>
 
-<body>
     <div>
         <ag-grid-angular
             class="ag-theme-alpine"
@@ -15,7 +14,6 @@
         </ag-grid-angular>
        
     </div>
-    <!-- rowSelection="multiple"-->
     <div *ngIf="_item" class="div2">
         <h2>Add or Edit</h2>
 
@@ -30,10 +28,5 @@
             
         <p><span style="color:red" >Quantity :</span>
         <input  type="text"  [(ngModel)]="_item.quantity"></p>
-
-        <!--   <p><span ng-show   style="color:red" >Control :</span>
-                <input type="text"  [(ngModel)]="selected.control" >
-                </p>-->
         <button  (click)="register()">Register</button>
     </div>
-</body>

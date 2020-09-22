@@ -1,11 +1,4 @@
 import { Component, OnInit,Output,EventEmitter } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular';
-import { ViewChild ,Input} from '@angular/core';
-import { ButtonRendererComponent } from './storage/button.component';
-import { Items } from './Items';
-import { combineLatest } from 'rxjs';
-import { Grid, GridOptions, GridApi } from 'ag-grid-community';
-import {ItemService} from './item.service'
 import {Router} from '@angular/router'
 @Component({
   selector: 'app-root',
