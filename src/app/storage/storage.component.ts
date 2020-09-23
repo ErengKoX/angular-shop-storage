@@ -94,7 +94,7 @@ export class StorageComponent {
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
   }
 
-
+//กำหนด ปุ่ม register ให้สามารถ เพิ่ม หรือ แก้ไข ข้อมูลในตาราง ag-grid 
   _item:Items
   register(){
     this.addNo = this._item.no
