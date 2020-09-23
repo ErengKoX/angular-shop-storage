@@ -34,7 +34,8 @@ export class StorageComponent {
   no:any=0
   check:boolean =true
   
-
+  onGridReady(){
+  }
 
   ngOnInit() {
     this.rowData = this.ItemService.getItems2()
@@ -87,13 +88,13 @@ export class StorageComponent {
     }
   }
   
-
  
   onSelectionChanged(){
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
-
   }
+
+
   _item:Items
   register(){
     this.addNo = this._item.no
@@ -144,9 +145,5 @@ export class StorageComponent {
   }
   
 
-  onGridReady(params){
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    this.gridOption 
-  }
+ 
 }

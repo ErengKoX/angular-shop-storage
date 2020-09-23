@@ -3,7 +3,7 @@
     <div>
         <ag-grid-angular
             class="ag-theme-alpine"
-            (gridReady)="onGridReady($event)"
+            (gridReady)="onGridReady()"
             (click)="onSelectionChanged()"
             #agGrid
             [columnDefs]="columnDefs"
