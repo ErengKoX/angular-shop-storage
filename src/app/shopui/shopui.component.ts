@@ -1,5 +1,5 @@
 import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem,copyArrayItem} from '@angular/cdk/drag-drop';
 import { Items} from '../Items'
 import { ItemService } from '../item.service';
 import {Chart} from 'node_modules/chart.js'
@@ -11,6 +11,7 @@ import { identifierModuleUrl } from '@angular/compiler';
 })
 export class ShopuiComponent implements OnInit {
   items = []
+  //items2 =[]
   basket =[]
   addbasket:Items
   Chart: any = []
@@ -68,23 +69,25 @@ export class ShopuiComponent implements OnInit {
     return res;
     
   }
-
-  drop(event: CdkDragDrop<any[]>) {
+  isPointerOverContainer:boolean
+  drop(event:CdkDragDrop<any[]>) {
     //this.ItemService.addBasket(this.addbasket)
-    //console.log(this.basket)
-    
-    console.log(event)
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      
+    console.log(this.basket.length)
+    let idx = event.container.data.indexOf(event.previousContainer.data[event.previousIndex]);
+    if (idx != -1) {
+      //moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      this.isPointerOverContainer = event.isPointerOverContainer;
+      console.log(this.isPointerOverContainer)
     } else {
-      
       event.previousContainer.data[event.previousIndex].sumUnit = 0;
-      transferArrayItem(event.previousContainer.data,
+      copyArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+        
     }
-    this.getChart()
+    if(this.isPointerOverContainer == true){
+    
+    }
   }
 }
