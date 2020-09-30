@@ -5,25 +5,23 @@
 
       <div cdkDropList [cdkDropListData]="items" class="example-list test" cdkDropListSortingDisabled
         (cdkDropListDropped)="drop($event)">
-
         <div class="example-box-rec" *ngFor="let item of items" cdkDrag>
           <div style="margin-left: 10px; margin-top: 10px; width: 100%; text-align: left;"> {{item.name}}</div>
           <div style="width: 100%; text-align: center;"> {{item.price}} Baht</div>
         </div>
       </div>
     </div>
-
+    
     <div class="example-container">
       <canvas id="myChart"></canvas>
       <h2>Shopping basket</h2>
 
-      <div cdkDropList [cdkDropListData]="basket" class="example-list" (cdkDropListDropped)="drop($event)" >
+      <div cdkDropList [cdkDropListData]="basket" class="example-list" (cdkDropListDropped)="drop($event)" cdkDropListSortingDisabled>
         <div class="example-box-list" *ngFor="let item of basket" cdkDrag>
           <div style="width: 33%;">{{item.name}}</div>
-          <div style="width: 33%;"><input type="number" [(ngModel)]="item.sumUnit" value="0" min="0" [max]="max" /></div>
-          <div style="width: 33%;" >{{ item.price * item.sumUnit }} Baht</div>
+          <div style="width: 33%;"><input type="number" [(ngModel)]="item.sumUnit" value="0" min="0" [max]="item.quantity" (click)="getarreach(item.price,item.sumUnit,basket.indexOf(item))"></div>
+          <div style="width: 33%;"> {{item.price*item.sumUnit}}Baht</div>
         </div>
-
       </div>
       <div style="height: 70px; border-width: 1px; align-content: flex-start; flex-direction: row; flex-wrap: wrap; background-color:burlywood; box-sizing: border-box;">
         <div style="padding-left: 10px; padding-top: 10px; text-align: left;"> Total</div>

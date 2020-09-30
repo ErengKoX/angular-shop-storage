@@ -19,26 +19,21 @@ export class ShopuiComponent implements OnInit {
   //getitem = this.ItemService.getItems()
   name =[]
   price =[]
-  max:number = 1
+  price2 =[]
+  max =[]
+  sum =[]
+  arreach=[]
+  getall:number[] = []
+  //sumUnit=0
   ngOnInit(){
     this.items = this.ItemService.getItems()
-    //console.log(this.items)
-    
-    /*for (var index = 0; index < this.basket.length; index++) {
-      this.data_name.push(this.basket[index].name)
-      this.data_price.push(this.basket[index].price)
-    }*/
-  
-  }
-  //sumUnit=0
-  getChart(){
     this.Chart = new Chart('myChart', { // สร้าง object และใช้ชื่อ id lineChart ในการอ้างอิงเพื่อนำมาเเสดงผล
       type: 'pie',
       data: {
           labels: this.name, // ชื่อของข้อมูลในแนวแกน x
           datasets: [{ 
-             label: 'Number of items sold in months',
-             data: this.price, 
+             label: 'Number of items',
+             data: this.arreach,
              fill: false,
              lineTension: 0.2,
              //borderColor: "red", // สีของเส้น
@@ -48,7 +43,7 @@ export class ShopuiComponent implements OnInit {
       },
       options: {
         title: {
-          text: "Line Chart",
+          text: "List of Items",
           display: true
        }
       },
@@ -61,33 +56,55 @@ export class ShopuiComponent implements OnInit {
        }
    })
   }
+  getChart(){
+   
+  }
   getSum() {
     var res = 0;
     this.basket.forEach(element => {
       res = res + (element.price * element.sumUnit);
     })
     return res;
+  }
+  getarreach(d1,d2,d3){
+    for (var index = 0; index < this.basket.length; index++) {
+      //this.getall.push(this.arreach.indexOf(this.basket[index]))
+    }
+    console.log(d3)
+   
     
   }
+  getidx = []
   isPointerOverContainer:boolean
+  
   drop(event:CdkDragDrop<any[]>) {
-    //this.ItemService.addBasket(this.addbasket)
-    console.log(this.basket.length)
-    let idx = event.container.data.indexOf(event.previousContainer.data[event.previousIndex]);
+    
+    var idx = event.container.data.indexOf(event.previousContainer.data[event.previousIndex]);
     if (idx != -1) {
       //moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       this.isPointerOverContainer = event.isPointerOverContainer;
-      console.log(this.isPointerOverContainer)
-    } else {
+      console.log(555)
+     
+    } 
+    else{
       event.previousContainer.data[event.previousIndex].sumUnit = 0;
       copyArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
-        
+        this.basket.length)
+      
+      this.name.push(this.basket[event.currentIndex].name)
+      this.price.push(this.basket[event.currentIndex].price)
+      this.max.push(this.basket[event.currentIndex].quantity)
+      this.arreach.push(this.basket[event.currentIndex].price*this.basket[event.currentIndex].quantity)
     }
-    if(this.isPointerOverContainer == true){
+   
     
-    }
+    /*if(this.isPointerOverContainer == true){
+    
+    }*/
+    
+    this.getChart()
   }
+ 
 }

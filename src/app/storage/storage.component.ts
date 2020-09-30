@@ -90,6 +90,7 @@ export class StorageComponent {
   
  
   onSelectionChanged(){
+
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
   }
@@ -97,6 +98,7 @@ export class StorageComponent {
 //กำหนด ปุ่ม register ให้สามารถ เพิ่ม หรือ แก้ไข ข้อมูลในตาราง ag-grid 
   _item:Items
   register(){
+
     this.addNo = this._item.no
     this.addName = this._item.name  
     this.addPrice = this._item.price
@@ -108,7 +110,8 @@ export class StorageComponent {
         name:this.addName,
         price:this.addPrice,
         quantity:this.addQuantity,
-      };
+      }
+      //rowNode.updateData(newData)
     }
     
     if(this.check == false){
@@ -129,7 +132,6 @@ export class StorageComponent {
    
   }
 
- 
   onAddRow() {
     if (this.rowData.length == this.no) {
       this.no=this.no+1
@@ -143,7 +145,4 @@ export class StorageComponent {
     this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
     this.check= false
   }
-  
-
- 
 }
