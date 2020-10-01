@@ -22,11 +22,41 @@ export class ShopuiComponent implements OnInit {
   price2 =[]
   max =[]
   sum =[]
-  arreach=[]
+  arreach:number[]=[]
   getall:number[] = []
   //sumUnit=0
   ngOnInit(){
     this.items = this.ItemService.getItems()
+    
+  }
+  dynamicColors () {
+    var r = Math.floor(Math.random() * 255);
+    var g = Math.floor(Math.random() * 255);
+    var b = Math.floor(Math.random() * 255);
+    return "rgb(" + r + "," + g + "," + b + ")";
+ };
+  getSum() {
+    var res = 0;
+    this.basket.forEach(element => {
+      res = res + (element.price * element.sumUnit);
+    })
+    return res;
+  }
+  color =[]
+  getarreach(d1,d2,d3){
+    
+    /*for (let index = 0; index < this.color.length; index++) {
+      this.color[index] = (this.dynamicColors())
+      
+    }*/
+    //this.getall.push(this.arreach.indexOf(this.basket[index]))
+    
+    //console.log(d1) //ราคา
+    //console.log(d2) //จำนวน
+    //console.log(d3) //index
+    this.arreach.splice(d3,1,d1*d2)
+    console.log(this.arreach)
+
     this.Chart = new Chart('myChart', { // สร้าง object และใช้ชื่อ id lineChart ในการอ้างอิงเพื่อนำมาเเสดงผล
       type: 'pie',
       data: {
@@ -38,7 +68,7 @@ export class ShopuiComponent implements OnInit {
              lineTension: 0.2,
              //borderColor: "red", // สีของเส้น
              borderWidth: 1,
-             backgroundColor: ['yellow','blue']
+             backgroundColor: this.color
           }]
       },
       options: {
@@ -55,24 +85,6 @@ export class ShopuiComponent implements OnInit {
          }]
        }
    })
-  }
-  getChart(){
-   
-  }
-  getSum() {
-    var res = 0;
-    this.basket.forEach(element => {
-      res = res + (element.price * element.sumUnit);
-    })
-    return res;
-  }
-  getarreach(d1,d2,d3){
-    for (var index = 0; index < this.basket.length; index++) {
-      //this.getall.push(this.arreach.indexOf(this.basket[index]))
-    }
-    console.log(d3)
-   
-    
   }
   getidx = []
   isPointerOverContainer:boolean
@@ -93,18 +105,18 @@ export class ShopuiComponent implements OnInit {
         event.previousIndex,
         this.basket.length)
       
-      this.name.push(this.basket[event.currentIndex].name)
+        console.log(this.dynamicColors())
+        this.color.push(this.dynamicColors())
+        console.log(this.color)
+      /*this.name.push(this.basket[event.currentIndex].name)
       this.price.push(this.basket[event.currentIndex].price)
       this.max.push(this.basket[event.currentIndex].quantity)
-      this.arreach.push(this.basket[event.currentIndex].price*this.basket[event.currentIndex].quantity)
+      this.arreach.push(this.basket[event.currentIndex].price*this.basket[event.currentIndex].quantity)*/
     }
-   
-    
     /*if(this.isPointerOverContainer == true){
     
     }*/
     
-    this.getChart()
   }
  
 }

@@ -49,7 +49,6 @@ export class StorageComponent {
     }
   }
 
-
   public get Item():Items{
     return this._item;
   }
@@ -129,7 +128,8 @@ export class StorageComponent {
            };
     this.ItemService.addItem(currentItem);
     this.ItemService.addItem2(currentItem);
-   
+    /*this.rowData.push(currentItem)
+    console.log(this.rowData)*/
   }
 
   onAddRow() {
