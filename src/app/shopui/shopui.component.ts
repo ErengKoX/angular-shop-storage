@@ -108,15 +108,12 @@ export class ShopuiComponent implements OnInit {
         console.log(this.dynamicColors())
         this.color.push(this.dynamicColors())
         console.log(this.color)
-      /*this.name.push(this.basket[event.currentIndex].name)
-      this.price.push(this.basket[event.currentIndex].price)
-      this.max.push(this.basket[event.currentIndex].quantity)
-      this.arreach.push(this.basket[event.currentIndex].price*this.basket[event.currentIndex].quantity)*/
+     
     }
     /*if(this.isPointerOverContainer == true){
     
     }*/
-    
+    console.log(this.basket)
   }
  
 }

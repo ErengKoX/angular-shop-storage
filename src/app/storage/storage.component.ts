@@ -16,8 +16,8 @@ export class StorageComponent {
   
   frameworkComponents: any;
   rowDataClicked1 = {};
-  gridApi
-  gridColumnApi
+  public gridApi
+  public gridColumnApi
   
 
   // onSelectionChanged and getSelectedRow
@@ -34,7 +34,9 @@ export class StorageComponent {
   no:any=0
   check:boolean =true
   
-  onGridReady(){
+  onGridReady(params){
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
   }
 
   ngOnInit() {
@@ -88,10 +90,11 @@ export class StorageComponent {
   }
   
  
-  onSelectionChanged(){
-
+  onSelectionChanged(event){
+    
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
+    console.log(this.selected)
   }
 
 //กำหนด ปุ่ม register ให้สามารถ เพิ่ม หรือ แก้ไข ข้อมูลในตาราง ag-grid 
