@@ -11,7 +11,7 @@ import { identifierModuleUrl } from '@angular/compiler';
 })
 export class ShopuiComponent implements OnInit {
   items = []
-  //items2 =[]
+  
   basket =[]
   addbasket:Items
   Chart: any = []
@@ -51,9 +51,6 @@ export class ShopuiComponent implements OnInit {
     }*/
     //this.getall.push(this.arreach.indexOf(this.basket[index]))
     
-    //console.log(d1) //ราคา
-    //console.log(d2) //จำนวน
-    //console.log(d3) //index
     this.arreach.splice(d3,1,d1*d2)
     console.log(this.arreach)
 
@@ -95,7 +92,7 @@ export class ShopuiComponent implements OnInit {
     if (idx != -1) {
       //moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
       this.isPointerOverContainer = event.isPointerOverContainer;
-      console.log(555)
+      console.log(this.isPointerOverContainer)
      
     } 
     else{
@@ -105,15 +102,22 @@ export class ShopuiComponent implements OnInit {
         event.previousIndex,
         this.basket.length)
       
-        console.log(this.dynamicColors())
+        //console.log(this.dynamicColors())
         this.color.push(this.dynamicColors())
-        console.log(this.color)
+        //console.log(this.color)
+      
      
     }
-    /*if(this.isPointerOverContainer == true){
     
-    }*/
-    console.log(this.basket)
+    if(this.isPointerOverContainer == false){
+      this.basket.splice(event.previousIndex,1)
+      console.log(this.basket)
+    }
+    
   }
+  /*deleteitems =[]
+  removeItem(event:CdkDragDrop<any[]>) {
+    console.log(event)
+  }*/
  
 }

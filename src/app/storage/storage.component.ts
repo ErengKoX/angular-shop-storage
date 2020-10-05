@@ -74,13 +74,6 @@ export class StorageComponent {
 
   //กำหนดให้ข้อมูลในตารางว่างเปล่า เพื่อที่จะ กด New เพื่อเพิ่มข้อมูล
   rowData = []
-  
-  //กำหนดอีเว้น ของปุ่ม ลบ ที่อยู่ในตาราง โดยการคลิก row/ข้อมูล ที่อยู่ในตารางแล้วกด ปุ่ม Delete
-  onDelete(e) {
-    this.rowDataClicked1 = e.rowData;
-    var selectedData = this.agGrid.api.getSelectedRows();
-    this.agGrid.api.updateRowData({ remove: selectedData });
-  }
 
   rowSelection='single'
   gridOption = {
@@ -89,12 +82,13 @@ export class StorageComponent {
     }
   }
   
- 
+  checkselect = false
   onSelectionChanged(event){
     
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
-    console.log(this.selected)
+   
+    this.checkselect = true
   }
 
 //กำหนด ปุ่ม register ให้สามารถ เพิ่ม หรือ แก้ไข ข้อมูลในตาราง ag-grid 
@@ -114,38 +108,45 @@ export class StorageComponent {
         quantity:this.addQuantity,
       }
       //rowNode.updateData(newData)
+      
     }
     
     if(this.check == false){
       this.agGrid.api.updateRowData({
-        add: [{ no: this.addNo, name: this.addName, price: this.addPrice ,quantity:this.addQuantity}]
+        add: [{ no: this._item.no, name: this._item.name, price: this._item.price ,quantity:this._item.quantity}]
       })
       this.check =true
     }
+    console.log(this.check)
     const currentItem:Items = {
-            no:this._item.no,
-            name:this._item.name,
-            price:this._item.price,
-            quantity:this._item.quantity,
-            sumUnit:this._item.sumUnit
-           };
-    this.ItemService.addItem(currentItem);
-    this.ItemService.addItem2(currentItem);
-    /*this.rowData.push(currentItem)
-    console.log(this.rowData)*/
+      no:this._item.no,
+      name:this._item.name,
+      price:this._item.price,
+      quantity:this._item.quantity,
+      sumUnit:this._item.sumUnit
+     }
+     this.ItemService.addItem(currentItem);
+     this.ItemService.addItem2(currentItem);
   }
 
   onAddRow() {
     if (this.rowData.length == this.no) {
       this.no=this.no+1
       console.log(this.no)
-    } else {
-    }
+    } 
+    
     if (this.rowData.length != this.no) {
       this.no = this.rowData.length+1
-    } else { 
-    }
+    } 
+    
     this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
     this.check= false
+    console.log(this.check)
+  }
+  //กำหนดอีเว้น ของปุ่ม ลบ ที่อยู่ในตาราง โดยการคลิก row/ข้อมูล ที่อยู่ในตารางแล้วกด ปุ่ม Delete
+  onDelete(e) {
+    this.rowDataClicked1 = e.rowData;
+    var selectedData = this.agGrid.api.getSelectedRows();
+    this.agGrid.api.updateRowData({ remove: selectedData });
   }
 }

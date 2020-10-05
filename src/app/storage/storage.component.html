@@ -1,5 +1,5 @@
-<button class="btn btn-primary mb-3" (click)="onAddRow()">New</button>
-
+<button class="btn btn-primary mb-3" (click)="onAddRow()">New</button>&nbsp;
+<button class="btn btn-primary mb-3" >Delete</button>
     <div>
         <ag-grid-angular
             class="ag-theme-alpine"
@@ -7,7 +7,7 @@
             (click)="onSelectionChanged(rowData)"
             #agGrid
             [columnDefs]="columnDefs"
-            [(rowData)]="rowData"
+            [rowData]="rowData"
             [rowSelection] = "rowSelection"
             [frameworkComponents]="frameworkComponents"
         >
