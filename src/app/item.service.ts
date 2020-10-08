@@ -18,14 +18,24 @@ export class ItemService {
   private _items:Items[] = [];
   private _items2:Items[]=[]
   private _basket:Items[]=[]
+
+  //additem&getitems รับส่งไปแสดงที่ UI
   addItem(item: Items) {
-    this._items.push(item);
+    
+   
+      this._items.push(item)
+    
+  
   }
   getItems(): Items[] {
         return this._items;
   }
+  //additem2&getitems2 รับส่งไปแสดงที่ grid
   addItem2(item:Items){
-    this._items2.push(item)
+   
+   
+      this._items2.push(item)
+   
    }
   getItems2(): Items[] {
     return this._items2;

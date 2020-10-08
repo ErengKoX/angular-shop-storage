@@ -13,12 +13,12 @@ import {ItemService} from '../item.service'
 export class StorageComponent {
   @ViewChild("agGrid",{static: false})agGrid : AgGridAngular;
   name = 'Angular 10';
-  
+
   frameworkComponents: any;
   rowDataClicked1 = {};
   public gridApi
   public gridColumnApi
-  
+
 
   // onSelectionChanged and getSelectedRow
   selected:any
@@ -33,27 +33,27 @@ export class StorageComponent {
   // AddRow ( create data )
   no:any=0
   check:boolean =true
-  
+
   onGridReady(params){
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
   }
-
+  rowData = []
   ngOnInit() {
     this.rowData = this.ItemService.getItems2()
     console.log(this.rowData.length)
   }
 
-  
+
   constructor(private ItemService : ItemService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
     }
   }
 
-  public get Item():Items{
+  /*public get Item():Items{
     return this._item;
-  }
+  }*/
 
 // กำหนด หัวข้อในตาราง
   columnDefs = [
@@ -73,7 +73,7 @@ export class StorageComponent {
   ];
 
   //กำหนดให้ข้อมูลในตารางว่างเปล่า เพื่อที่จะ กด New เพื่อเพิ่มข้อมูล
-  rowData = []
+  
 
   rowSelection='single'
   gridOption = {
@@ -81,42 +81,51 @@ export class StorageComponent {
       return data.no
     }
   }
-  
+
   checkselect = false
+  
   onSelectionChanged(event){
-    
+
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
-   
+
     this.checkselect = true
+    
+    this._item.no = this.selected.no
+    this._item.name = this.selected.name
+    this._item.price = this.selected.price
+    this._item.quantity = this.selected.quantity
   }
 
-//กำหนด ปุ่ม register ให้สามารถ เพิ่ม หรือ แก้ไข ข้อมูลในตาราง ag-grid 
+//กำหนด ปุ่ม register ให้สามารถ เพิ่ม หรือ แก้ไข ข้อมูลในตาราง ag-grid
   _item:Items
+  numcheck:number
   register(){
-
-    this.addNo = this._item.no
-    this.addName = this._item.name  
-    this.addPrice = this._item.price
-    this.addQuantity = this._item.quantity
-    if (this.check == true) {
-      var rowNode = this.gridApi.getRowNode(this._item.no-1)
+    
+    /*this.addNo = this.selected.no
+    this.addName = this.selected.name
+    this.addPrice = this.selected.price
+    this.addQuantity = this.selected.quantity*/
+    if (this.checkselect == true) {
+      /*var rowNode = this.gridApi.getRowNode(this._item.no-1)
       var newData = {
         no:this.addNo,
         name:this.addName,
         price:this.addPrice,
         quantity:this.addQuantity,
-      }
+      }*/
       //rowNode.updateData(newData)
-      
+      console.log('checkselect == true')
+     
     }
-    
-    if(this.check == false){
+
+    /*if(this.check == false){
       this.agGrid.api.updateRowData({
         add: [{ no: this._item.no, name: this._item.name, price: this._item.price ,quantity:this._item.quantity}]
       })
       this.check =true
-    }
+    }*/
+
     console.log(this.check)
     const currentItem:Items = {
       no:this._item.no,
@@ -127,19 +136,20 @@ export class StorageComponent {
      }
      this.ItemService.addItem(currentItem);
      this.ItemService.addItem2(currentItem);
+     this.ngOnInit()
   }
 
   onAddRow() {
     if (this.rowData.length == this.no) {
       this.no=this.no+1
       console.log(this.no)
-    } 
-    
+    }
+
     if (this.rowData.length != this.no) {
       this.no = this.rowData.length+1
-    } 
-    
-    this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0};
+    }
+
+    this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0}
     this.check= false
     console.log(this.check)
   }

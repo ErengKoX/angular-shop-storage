@@ -13,21 +13,19 @@ export class ShopuiComponent implements OnInit {
   items = []
   
   basket =[]
-  addbasket:Items
+  //addbasket:Items
   Chart: any = []
   constructor(private ItemService : ItemService) { }
   //getitem = this.ItemService.getItems()
-  name =[]
+  namelable =[]
   price =[]
-  price2 =[]
-  max =[]
-  sum =[]
-  arreach:number[]=[]
+
+  arreach:number[]=[0]
   getall:number[] = []
-  //sumUnit=0
+ 
   ngOnInit(){
     this.items = this.ItemService.getItems()
-    
+    this.getarreach(0,0,0)
   }
   dynamicColors () {
     var r = Math.floor(Math.random() * 255);
@@ -52,12 +50,12 @@ export class ShopuiComponent implements OnInit {
     //this.getall.push(this.arreach.indexOf(this.basket[index]))
     
     this.arreach.splice(d3,1,d1*d2)
-    console.log(this.arreach)
+    //console.log(this.arreach)
 
     this.Chart = new Chart('myChart', { // สร้าง object และใช้ชื่อ id lineChart ในการอ้างอิงเพื่อนำมาเเสดงผล
       type: 'pie',
       data: {
-          labels: this.name, // ชื่อของข้อมูลในแนวแกน x
+          labels: this.namelable, // ชื่อของข้อมูลในแนวแกน x
           datasets: [{ 
              label: 'Number of items',
              data: this.arreach,
@@ -102,19 +100,18 @@ export class ShopuiComponent implements OnInit {
         event.previousIndex,
         this.basket.length)
       
-        //console.log(this.dynamicColors())
         this.color.push(this.dynamicColors())
-        //console.log(this.color)
-      
-     
+        
     }
     
     if(this.isPointerOverContainer == false){
       this.basket.splice(event.previousIndex,1)
       console.log(this.basket)
+      this.isPointerOverContainer = true
     }
     
   }
+
   /*deleteitems =[]
   removeItem(event:CdkDragDrop<any[]>) {
     console.log(event)
