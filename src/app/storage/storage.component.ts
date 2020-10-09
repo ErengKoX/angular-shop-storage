@@ -10,7 +10,7 @@ import {ItemService} from '../item.service'
   templateUrl: './storage.component.html',
   styleUrls: ['./storage.component.scss']
 })
-export class StorageComponent {
+export class StorageComponent implements OnInit {
   @ViewChild("agGrid",{static: false})agGrid : AgGridAngular;
   name = 'Angular 10';
 
@@ -42,18 +42,19 @@ export class StorageComponent {
   ngOnInit() {
     this.rowData = this.ItemService.getItems2()
     console.log(this.rowData.length)
+   
   }
-
 
   constructor(private ItemService : ItemService) {
     this.frameworkComponents = {
       buttonRenderer: ButtonRendererComponent,
     }
+    
   }
 
-  /*public get Item():Items{
+  public get Item():Items{
     return this._item;
-  }*/
+  }
 
 // กำหนด หัวข้อในตาราง
   columnDefs = [
@@ -76,11 +77,11 @@ export class StorageComponent {
   
 
   rowSelection='single'
-  gridOption = {
-      getRowNodeId : function(data){
+  //gridOption = {
+     /* getRowNodeId : function(data){
       return data.no
-    }
-  }
+    }*/
+  //}
 
   checkselect = false
   
@@ -90,11 +91,8 @@ export class StorageComponent {
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
 
     this.checkselect = true
+    this._item = this.selected
     
-    this._item.no = this.selected.no
-    this._item.name = this.selected.name
-    this._item.price = this.selected.price
-    this._item.quantity = this.selected.quantity
   }
 
 //กำหนด ปุ่ม register ให้สามารถ เพิ่ม หรือ แก้ไข ข้อมูลในตาราง ag-grid
@@ -115,8 +113,7 @@ export class StorageComponent {
         quantity:this.addQuantity,
       }*/
       //rowNode.updateData(newData)
-      console.log('checkselect == true')
-     
+      
     }
 
     /*if(this.check == false){
@@ -124,8 +121,9 @@ export class StorageComponent {
         add: [{ no: this._item.no, name: this._item.name, price: this._item.price ,quantity:this._item.quantity}]
       })
       this.check =true
+      
     }*/
-
+   
     console.log(this.check)
     const currentItem:Items = {
       no:this._item.no,
@@ -136,9 +134,9 @@ export class StorageComponent {
      }
      this.ItemService.addItem(currentItem);
      this.ItemService.addItem2(currentItem);
-     this.ngOnInit()
+     this.gridApi.updateRowData({ add: [this.rowData] })
   }
-
+ 
   onAddRow() {
     if (this.rowData.length == this.no) {
       this.no=this.no+1
