@@ -41,8 +41,7 @@ export class StorageComponent implements OnInit {
   rowData = []
   ngOnInit() {
     this.rowData = this.ItemService.getItems2()
-    console.log(this.rowData.length)
-   
+    //console.log(this.rowData)
   }
 
   constructor(private ItemService : ItemService) {
@@ -84,7 +83,7 @@ export class StorageComponent implements OnInit {
   //}
 
   checkselect = false
-  
+  itemupdate = []
   onSelectionChanged(event){
 
     this.selected = this.gridApi.getSelectedRows()
@@ -113,16 +112,27 @@ export class StorageComponent implements OnInit {
         quantity:this.addQuantity,
       }*/
       //rowNode.updateData(newData)
+      var rowNode = this.gridApi.getRowNode(this._item.no-1)
+      var data = rowNode.data
+      data.no = this._item.no
+      data.name = this._item.name
+      data.price = this._item.price
+      data.quantity = this._item.quantity
+      this.agGrid.api.updateRowData({
+        update: [{ no: this._item.no, name: this._item.name, price: this._item.price ,quantity:this._item.quantity}]
+      })
+      this.ItemService.addItem2(data,this.checkselect);
+      this.ItemService.addItem(data,this.checkselect);
       
     }
 
-    /*if(this.check == false){
+    if(this.check == false){
       this.agGrid.api.updateRowData({
         add: [{ no: this._item.no, name: this._item.name, price: this._item.price ,quantity:this._item.quantity}]
       })
       this.check =true
       
-    }*/
+    }
    
     console.log(this.check)
     const currentItem:Items = {
@@ -132,9 +142,9 @@ export class StorageComponent implements OnInit {
       quantity:this._item.quantity,
       sumUnit:this._item.sumUnit
      }
-     this.ItemService.addItem(currentItem);
-     this.ItemService.addItem2(currentItem);
-     this.gridApi.updateRowData({ add: [this.rowData] })
+    this.ItemService.addItem(currentItem,this.checkselect);
+    this.ItemService.addItem2(currentItem,this.checkselect);
+    this.checkselect = false
   }
  
   onAddRow() {
@@ -145,16 +155,25 @@ export class StorageComponent implements OnInit {
 
     if (this.rowData.length != this.no) {
       this.no = this.rowData.length+1
+      
     }
-
+    
     this._item = {no:this.no,name:'',price:0,quantity:0,sumUnit:0}
     this.check= false
     console.log(this.check)
   }
   //กำหนดอีเว้น ของปุ่ม ลบ ที่อยู่ในตาราง โดยการคลิก row/ข้อมูล ที่อยู่ในตารางแล้วกด ปุ่ม Delete
-  onDelete(e) {
-    this.rowDataClicked1 = e.rowData;
-    var selectedData = this.agGrid.api.getSelectedRows();
-    this.agGrid.api.updateRowData({ remove: selectedData });
+  checkdelete = 0
+  
+  onDelete() {
+    //this.rowDataClicked1 = e.rowData;
+    this.checkdelete = 1
+    var ro = this.gridApi.getRowNode(this._item.no-1)
+    var selectedremove = ro.data
+    console.log(selectedremove)
+    this.ItemService.delete(selectedremove,this.checkdelete);
+    this.ItemService.delete2(selectedremove,this.checkdelete);
+    this.checkdelete = 0
+    
   }
 }

@@ -25,6 +25,7 @@ export class ShopuiComponent implements OnInit {
  
   ngOnInit(){
     this.items = this.ItemService.getItems()
+    
     this.getarreach(0,0,0)
   }
   dynamicColors () {
@@ -50,7 +51,7 @@ export class ShopuiComponent implements OnInit {
     //this.getall.push(this.arreach.indexOf(this.basket[index]))
     
     this.arreach.splice(d3,1,d1*d2)
-    //console.log(this.arreach)
+    
 
     this.Chart = new Chart('myChart', { // สร้าง object และใช้ชื่อ id lineChart ในการอ้างอิงเพื่อนำมาเเสดงผล
       type: 'pie',
