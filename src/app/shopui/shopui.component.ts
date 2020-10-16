@@ -100,8 +100,9 @@ export class ShopuiComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         this.basket.length)
-      
-        this.color.push(this.dynamicColors())
+      //this.ItemService.addBasket(event)
+      console.log(event.container.data)
+      this.color.push(this.dynamicColors())
         
     }
     

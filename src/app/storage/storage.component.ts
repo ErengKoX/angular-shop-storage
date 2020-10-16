@@ -145,6 +145,7 @@ export class StorageComponent implements OnInit {
     this.ItemService.addItem(currentItem,this.checkselect);
     this.ItemService.addItem2(currentItem,this.checkselect);
     this.checkselect = false
+    
   }
  
   onAddRow() {
