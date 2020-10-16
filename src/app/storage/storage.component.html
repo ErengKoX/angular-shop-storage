@@ -1,10 +1,11 @@
 <button class="btn btn-primary mb-3" (click)="onAddRow()">New</button>&nbsp;
 <button class="btn btn-primary mb-3" (click)="onDelete()">Delete</button>
-    <div>
+    <div  [hidden]="!HideGrid">
         <ag-grid-angular
             class="ag-theme-alpine"
             (gridReady)="onGridReady($event)"
-            (click)="onSelectionChanged(rowData)"
+            (rowDoubleClicked)="onSelectionChanged(rowData)"
+            
             #agGrid
             [columnDefs]="columnDefs"
             [rowData]="rowData"
@@ -12,9 +13,9 @@
             [frameworkComponents]="frameworkComponents"
         >
         </ag-grid-angular>
-       
+       <!--(rowDoubleClicked)="onRowDoubleClick(rowData)"-->
     </div>
-    <div *ngIf="_item" class="div2">
+    <div *ngIf="_item" class="div2" [hidden]="HideGrid">
         <h2>Add or Edit</h2>
 
         <p><span style="color:red" >No :</span>

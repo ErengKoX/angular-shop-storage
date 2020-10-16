@@ -54,7 +54,7 @@ export class StorageComponent implements OnInit {
   public get Item():Items{
     return this._item;
   }
-
+HideGrid = true
 // กำหนด หัวข้อในตาราง
   columnDefs = [
     {headerName: 'No', field: 'no',width:70,resizable: false},
@@ -88,11 +88,12 @@ export class StorageComponent implements OnInit {
 
     this.selected = this.gridApi.getSelectedRows()
     this.selected = this.selected.length === 1 ? this.selected[0] : '';
-
+    console.log(this.selected)
     this.checkselect = true
     this._item = this.selected
-    
+    this.HideGrid = false
   }
+ 
 
 //กำหนด ปุ่ม register ให้สามารถ เพิ่ม หรือ แก้ไข ข้อมูลในตาราง ag-grid
   _item:Items
@@ -133,7 +134,7 @@ export class StorageComponent implements OnInit {
       this.check =true
       
     }
-   
+    
     console.log(this.check)
     const currentItem:Items = {
       no:this._item.no,
@@ -145,10 +146,16 @@ export class StorageComponent implements OnInit {
     this.ItemService.addItem(currentItem,this.checkselect);
     this.ItemService.addItem2(currentItem,this.checkselect);
     this.checkselect = false
-    
+    /*this._item.no = 0
+    this._item.name =''
+    this._item.price = 0
+    this._item.quantity =0
+    this._item.sumUnit = 0*/
+    this.HideGrid = true
   }
  
   onAddRow() {
+    this.HideGrid = false
     if (this.rowData.length == this.no) {
       this.no=this.no+1
       console.log(this.no)
@@ -164,8 +171,8 @@ export class StorageComponent implements OnInit {
     console.log(this.check)
   }
   //กำหนดอีเว้น ของปุ่ม ลบ ที่อยู่ในตาราง โดยการคลิก row/ข้อมูล ที่อยู่ในตารางแล้วกด ปุ่ม Delete
-  checkdelete = 0
-  
+
+  checkdelete = 0 
   onDelete() {
     //this.rowDataClicked1 = e.rowData;
     this.checkdelete = 1
