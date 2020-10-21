@@ -1,5 +1,9 @@
-<button class="btn btn-primary mb-3" (click)="onAddRow()">New</button>&nbsp;
-<button class="btn btn-primary mb-3" (click)="onDelete()">Delete</button>
+<div>
+    <button class="btn btn-primary mb-3" (click)="onAddRow()">New</button>&nbsp;
+</div>
+
+<!--<button class="btn btn-primary mb-3" (click)="onDelete()">Delete</button>-->
+<div>
     <div  [hidden]="!HideGrid">
         <ag-grid-angular
             class="ag-theme-alpine"
@@ -31,3 +35,4 @@
         <input  type="text"  [(ngModel)]="_item.quantity"></p>
         <button  (click)="register()">Register</button>
     </div>
+</div>

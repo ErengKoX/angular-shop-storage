@@ -43,13 +43,6 @@ export class ButtonRendererComponent implements ICellRendererAngularComp {
       this.params.onClick(params);
 
     }
-    console.log(event)
-    this.checkdelete = 1
-    var ro = this.gridApi.getRowNode()
-    var selectedremove = ro.data
-    console.log(selectedremove)
-    this.ItemService.delete(selectedremove,this.checkdelete);
-    this.ItemService.delete2(selectedremove,this.checkdelete);
-    this.checkdelete = 0
+    
   }
 }

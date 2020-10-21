@@ -15,10 +15,19 @@ export class ItemService {
   price:number
   quantity:number
     
-  private _items:Items[] = [];
+  private _items:Items[] = []
   private _items2:Items[]=[]
   private _basket:Items[]=[]
+  addId:Items[]=[]
 
+  addIds(id:Items) {     
+    id.no = this.addId.length + 1;     
+    this.addId.push(id);
+    
+  }
+  getIds(): Items[]{
+    return this.addId;
+  }
   //additem&getitems รับส่งไปแสดงที่ UI
   addItem(item:Items,chek) {
     if(chek == false){
